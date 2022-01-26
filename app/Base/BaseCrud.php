@@ -1,0 +1,81 @@
+<?php
+
+namespace App\Base;
+
+use App\Interfaces\DtoInterface;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use InvalidArgumentException;
+
+abstract class BaseCrud
+{
+    public function list(array $data = [])
+    {
+        return $this->query()
+            ->filter($data)
+            ->paginate();
+    }
+
+    public function create(DtoInterface $data)
+    {
+        $class = $this->getModelClass();
+        $model = new $class();
+        $model->fill($data->dbData());
+        $model->save();
+        return $model;
+    }
+
+    public function update(DtoInterface $data, BaseModel|int $model): BaseModel
+    {
+        $model = $this->find($model);
+        $model->fill($data->dbData());
+        $model->save();
+
+        return $model;
+    }
+
+    public function delete(BaseModel|int $model)
+    {
+        $model = $this->find($model);
+        return $model->delete();
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     * @throws InvalidArgumentException
+     * @throws ModelNotFoundException
+     */
+    public function find(BaseModel|int $model)
+    {
+        if ($model instanceof BaseModel) {
+            return $model;
+        }
+        $class = $this->getModelClass();
+        return $class::findOrFail($model);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Builder
+     * @throws InvalidArgumentException
+     */
+    protected function query()
+    {
+        $class = $this->getModelClass();
+        
+        return $class::query()
+            ->orderBy('id', 'desc');
+    }
+
+    /**
+     * @return BaseModel | string
+     * @throws InvalidArgumentException
+     */
+    protected function getModelClass()
+    {
+        if (property_exists($this, 'modelClass')) {
+            return $this->modelClass;
+        }
+
+        throw new InvalidArgumentException(get_class($this) . ' modelClass property not implemented');
+    }
+}
