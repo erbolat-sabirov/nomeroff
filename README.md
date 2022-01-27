@@ -24,3 +24,8 @@ DB_PASSWORD=root
 ```
 php artisan migrate --seed
 ```
+
+## Admin
+login: super@admin.com
+
+pass:superadmin 
