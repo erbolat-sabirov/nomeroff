@@ -4,13 +4,12 @@ namespace App\Http\Requests;
 
 use App\Base\BaseRequest;
 use App\Dto\UserDto;
-use App\Helpers\Roles;
 use App\Interfaces\DtoInterface;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
 
-class UserRequest extends BaseRequest
+class UserUpdateRequest extends BaseRequest
 {
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -19,10 +18,9 @@ class UserRequest extends BaseRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Password::defaults()],
-            'role' => ['nullable', 'string', 'in:'. implode(',', Roles::list()) ]
+            'name' => ['nullable', 'string', 'max:255'],
+            'email' => ['nullable', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['nullable', 'confirmed', Password::defaults()],
         ];
     }
 

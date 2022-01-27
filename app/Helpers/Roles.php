@@ -27,12 +27,22 @@ class Roles
     {
         return [
             'user' => [
+                'viewAny',
                 'view',
-                'save'
+                'create',
+                'update',
+                'delete',
+                'restore',
+                'forceDelete'
             ],
-            'category' => [
+            'service' => [
+                'viewAny',
                 'view',
-                'save'
+                'create',
+                'update',
+                'delete',
+                'restore',
+                'forceDelete'
             ]
         ];
     }

@@ -11,6 +11,7 @@ class UserDto extends BaseDto
     public $name;
     public $email;
     public $password;
+    public $role;
 
 
     public function dbData(): array
