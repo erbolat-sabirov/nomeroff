@@ -3,8 +3,12 @@
 namespace App\Providers;
 
 use App\Helpers\Roles;
+use App\Models\Car;
+use App\Models\CarService;
 use App\Models\Service;
 use App\Models\User;
+use App\Policies\CarPolicy;
+use App\Policies\CarServicePolicy;
 use App\Policies\ServicePolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -19,7 +23,9 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         User::class => UserPolicy::class,
-        Service::class => ServicePolicy::class
+        Service::class => ServicePolicy::class,
+        Car::class => CarPolicy::class,
+        CarService::class => CarServicePolicy::class,
     ];
 
     /**

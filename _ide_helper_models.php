@@ -12,11 +12,48 @@
 
 namespace App\Models{
 /**
+ * App\Models\Car
+ *
+ * @method static \Database\Factories\CarFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|BaseModel filter($filter)
+ * @method static \Illuminate\Database\Eloquent\Builder|Car newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Car newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Car query()
+ */
+	class Car extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\CarService
+ *
+ * @method static \Database\Factories\CarServiceFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarService newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|CarService newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|CarService query()
+ */
+	class CarService extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Service
  *
+ * @property int $id
+ * @property string $title
+ * @property string $price
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Database\Factories\ServiceFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|BaseModel filter($filter)
  * @method static \Illuminate\Database\Eloquent\Builder|Service newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Service newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Service query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Service whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Service whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Service wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Service whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Service whereUpdatedAt($value)
  */
 	class Service extends \Eloquent {}
 }

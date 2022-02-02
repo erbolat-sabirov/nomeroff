@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Base\BaseRequest;
 use App\Dto\UserDto;
 use App\Interfaces\DtoInterface;
-use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
 class UserUpdateRequest extends BaseRequest
@@ -19,7 +19,13 @@ class UserUpdateRequest extends BaseRequest
     {
         return [
             'name' => ['nullable', 'string', 'max:255'],
-            'email' => ['nullable', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => [
+                'nullable', 
+                'string', 
+                'email', 
+                'max:255', 
+                Rule::unique('users')->ignore($this->route('manager')->id)
+            ],
             'password' => ['nullable', 'confirmed', Password::defaults()],
         ];
     }

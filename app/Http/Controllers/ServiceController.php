@@ -59,7 +59,7 @@ class ServiceController extends Controller
      */
     public function edit(Request $request, Service $service)
     {
-        $model = new ServiceDto($request->old() ?? $service->toArray());
+        $model = new ServiceDto($request->old() ?: $service->toArray());
         return view('service.edit', ['model' => $model]);
     }
 

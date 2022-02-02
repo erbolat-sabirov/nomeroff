@@ -43,7 +43,25 @@ class Roles
                 'delete',
                 'restore',
                 'forceDelete'
-            ]
+            ],
+            'car' => [
+                'viewAny',
+                'view',
+                'create',
+                'update',
+                'delete',
+                'restore',
+                'forceDelete'
+            ],
+            'car_service' => [
+                'viewAny',
+                'view',
+                'create',
+                'update',
+                'delete',
+                'restore',
+                'forceDelete'
+            ],
         ];
     }
 }

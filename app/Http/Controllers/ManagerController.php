@@ -60,9 +60,9 @@ class ManagerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, User $user)
+    public function edit(Request $request, User $manager)
     {
-        $model = new UserDto($request->old() ?? $user->toArray());
+        $model = new UserDto($request->old() ?: $manager->toArray());
         return view('manager.edit', ['model' => $model]);
     }
 
@@ -73,9 +73,9 @@ class ManagerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserUpdateRequest $request, $id)
+    public function update(UserUpdateRequest $request, User $manager)
     {
-        $this->userCrudService->update($request->getData(), $id);
+        $this->userCrudService->update($request->getData(), $manager->id);
 
         return redirect()->route('managers.index')->with('success', 'Success updated');
     }

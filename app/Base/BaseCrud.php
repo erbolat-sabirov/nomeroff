@@ -3,6 +3,7 @@
 namespace App\Base;
 
 use App\Interfaces\DtoInterface;
+use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use InvalidArgumentException;
 
@@ -19,16 +20,14 @@ abstract class BaseCrud
     {
         $class = $this->getModelClass();
         $model = new $class();
-        $model->fill($data->dbData());
-        $model->save();
+        $model->create($data->dbData());
         return $model;
     }
 
-    public function update(DtoInterface $data, BaseModel|int $model): BaseModel
+    public function update(DtoInterface $data, BaseModel|int $model): BaseModel|User
     {
         $model = $this->find($model);
-        $model->fill($data->dbData());
-        $model->save();
+        $model->update($data->dbData());
 
         return $model;
     }
