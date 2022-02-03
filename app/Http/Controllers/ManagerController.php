@@ -63,7 +63,7 @@ class ManagerController extends Controller
     public function edit(Request $request, User $manager)
     {
         $model = new UserDto($request->old() ?: $manager->toArray());
-        return view('manager.edit', ['model' => $model]);
+        return view('manager.edit', ['model' => $model, 'manager' => $manager]);
     }
 
     /**

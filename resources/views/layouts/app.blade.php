@@ -29,7 +29,9 @@
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}
+                <div class="container pt-2">
+                    {{ $slot }}
+                </div>
             </main>
         </div>
     </body>
