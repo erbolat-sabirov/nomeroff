@@ -88,11 +88,13 @@
                     {{ $models->links() }}
                 @endif
             @empty
-                Сервисы отсутствуют
+                Услуги отсутствуют
             @endforelse
             <div class="flex justify-end mt-2">
-                <a class="px-4 py-2 rounded-md bg-sky-500 text-sky-100 hover:bg-sky-600" href="{{ route('services.create') }}">Создать сервис</a>
+                <a class="px-4 py-2 rounded-md bg-sky-500 text-sky-100 hover:bg-sky-600" href="{{ route('services.create') }}">Создать услугу</a>
             </div>
+
+
     </x-slot>
 
 </x-app-layout>

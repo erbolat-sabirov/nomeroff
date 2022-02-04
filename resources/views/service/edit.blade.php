@@ -3,7 +3,7 @@
         <div class="container max-w-7xl mx-auto mt-8">
             <div class="mb-4">
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    Редактировать сервис
+                    Редактировать услугу
                 </h2>
             </div>
         </div>
