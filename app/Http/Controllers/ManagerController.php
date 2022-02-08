@@ -51,7 +51,7 @@ class ManagerController extends Controller
     {
         $this->userCrudService->createWithRole($request->getData(), $request->role);
 
-        return redirect()->route('managers.index')->with('success', 'Success created');
+        return redirect()->route('managers.index')->with('success', 'Успешно создано');
     }
 
     /**
@@ -77,7 +77,7 @@ class ManagerController extends Controller
     {
         $this->userCrudService->update($request->getData(), $manager->id);
 
-        return redirect()->route('managers.index')->with('success', 'Success updated');
+        return redirect()->route('managers.index')->with('success', 'Успешно изменено');
     }
 
     /**
@@ -89,6 +89,6 @@ class ManagerController extends Controller
     public function destroy(User $manager)
     {
         $this->userCrudService->delete($manager->id);
-        return redirect()->route('managers.index')->with('success', 'Success deleted');
+        return redirect()->route('managers.index')->with('success', 'Успешно удалено');
     }
 }
