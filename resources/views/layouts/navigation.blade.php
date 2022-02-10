@@ -13,13 +13,13 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        Дашборд
                     </x-nav-link>
                     <x-nav-link :href="route('managers.index')" :active="request()->routeIs('managers.index')">
-                        {{ __('Managers') }}
+                        Менеджеры
                     </x-nav-link>
                     <x-nav-link :href="route('services.index')" :active="request()->routeIs('services.index')">
-                        {{ __('Services') }}
+                        Услуги
                     </x-nav-link>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                Выход
                             </x-dropdown-link>
                         </form>
                     </x-slot>
@@ -70,7 +70,7 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+                Дашборд
             </x-responsive-nav-link>
         </div>
 
@@ -89,7 +89,7 @@
                     <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        Выход
                     </x-responsive-nav-link>
                 </form>
             </div>

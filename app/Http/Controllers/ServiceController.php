@@ -48,7 +48,7 @@ class ServiceController extends Controller
     public function store(StoreServiceRequest $request)
     {
         $model = $this->service->create($request->getData());
-        return redirect()->route('services.index')->with('success', 'Success created');
+        return redirect()->route('services.index')->with('success', 'Успешно создано');
     }
 
     /**
@@ -60,7 +60,7 @@ class ServiceController extends Controller
     public function edit(Request $request, Service $service)
     {
         $model = new ServiceDto($request->old() ?: $service->toArray());
-        return view('service.edit', ['model' => $model]);
+        return view('service.edit', ['model' => $model, 'service' => $service]);
     }
 
     /**
@@ -73,7 +73,7 @@ class ServiceController extends Controller
     public function update(UpdateServiceRequest $request, Service $service)
     {
         $model = $this->service->update($request->getData(), $service);
-        return redirect()->route('services.index')->with('success', 'Success updated');
+        return redirect()->route('services.index')->with('success', 'Успешно обновлено');
     }
 
     /**
@@ -85,6 +85,6 @@ class ServiceController extends Controller
     public function destroy(Service $service)
     {
         $model = $this->service->delete($service);
-        return redirect()->route('services.index')->with('success', 'Success deleted');
+        return redirect()->route('services.index')->with('success', 'Успешно удалено');
     }
 }

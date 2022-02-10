@@ -8,9 +8,9 @@ use App\Models\User;
 
 class UserCrudService extends BaseCrud
 {
-    
+
     public $modelClass = User::class;
-    
+
     public function createWithRole(DtoInterface $dto, string $role)
     {
         $user = parent::create($dto);
