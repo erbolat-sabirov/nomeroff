@@ -20,4 +20,9 @@ class CarCrudService extends BaseCrud
         return $res;
     }
 
+    public function findByNumber(string $number): Car
+    {
+        return $this->query()->where('number', $number)->first(); 
+    }
+
 }

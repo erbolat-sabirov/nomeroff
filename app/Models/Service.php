@@ -26,6 +26,10 @@ use App\Filters\ServiceFilter;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Car[] $cars
  * @property-read int|null $cars_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ServiceItem[] $items
+ * @property-read int|null $items_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Washing[] $washings
+ * @property-read int|null $washings_count
  */
 class Service extends BaseModel
 {
@@ -34,8 +38,13 @@ class Service extends BaseModel
         return ServiceFilter::class;
     }
 
-    public function cars()
+    public function washings()
     {
-        return $this->hasManyThrough(Car::class, CarService::class);
+        return $this->hasMany(Washing::class);
+    }
+
+    public function items()
+    {
+        return $this->hasManyThrough(ServiceItem::class, ServiceId::class, 'service_id', 'id', 'id', 'service_item_id');
     }
 }

@@ -41,20 +41,16 @@ class SetCarNumber extends Command
     {
         $numbers = json_decode($this->argument('numbers'), true);
         $zones = json_decode($this->argument('zones'), true);
-
         foreach ($numbers as $key => $value) {
             $zone = $zones[0] ?? 'ru';
-            if (!$this->carCrudService->exists(number:$zone, zone:$value)) {
+            if (!$this->carCrudService->exists(number:$value, zone:$zone)) {
                 $this->carCrudService->create(new CarDto(['number' => $value, 'zone' => $zone]));
+            }else{
+                $car = $this->carCrudService->findByNumber($value);
             }
         }
 
         return 0;
     }
-
-    // public function FunctionName(Type $var = null)
-    // {
-    //     # code...
-    // }
 
 }

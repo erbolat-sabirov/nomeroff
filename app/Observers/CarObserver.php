@@ -4,16 +4,9 @@ namespace App\Observers;
 
 use App\Dto\CarServiceDto;
 use App\Models\Car;
-use App\Services\Crud\CarServiceCrudService;
 
 class CarObserver
 {
-
-    public function __construct(private CarServiceCrudService $service)
-    {
-    }
-
-
 
     /**
      * Handle the Car "created" event.
@@ -23,7 +16,6 @@ class CarObserver
      */
     public function created(Car $car)
     {
-        $this->service->create(new CarServiceDto(['car_id' => $car->id]));
     }
 
     /**

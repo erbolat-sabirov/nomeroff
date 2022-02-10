@@ -2,20 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Dto\CarDto;
 use App\Http\Requests\StoreCarRequest;
 use App\Http\Requests\UpdateCarRequest;
 use App\Models\Car;
+use App\Services\Crud\CarCrudService;
+use App\ViewModels\Car\CarCreateViewModel;
+use App\ViewModels\Car\CarEditViewModel;
+use App\ViewModels\Car\CarListViewModel;
+use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
+
+    public function __construct(private CarCrudService $carCrudService)
+    {
+        $this->authorizeResource(Car::class, 'car');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return view('cars.index', new CarListViewModel($this->carCrudService, $request->all()));
     }
 
     /**
@@ -23,9 +35,9 @@ class CarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        return view('car.create', new CarCreateViewModel(data:$request->old()));
     }
 
     /**
@@ -36,7 +48,8 @@ class CarController extends Controller
      */
     public function store(StoreCarRequest $request)
     {
-        //
+        $this->carCrudService->create($request->getData());
+        return redirect()->route('cars.index')->with('success', 'Car success created');
     }
 
     /**
@@ -47,7 +60,7 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
-        //
+        return view('car.show', ['model' => $car]);
     }
 
     /**
@@ -56,9 +69,9 @@ class CarController extends Controller
      * @param  \App\Models\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function edit(Car $car)
+    public function edit(Request $request, Car $car)
     {
-        //
+        return view('car.edit', new CarEditViewModel($this->carCrudService, $request->old(), $car));
     }
 
     /**
@@ -70,7 +83,8 @@ class CarController extends Controller
      */
     public function update(UpdateCarRequest $request, Car $car)
     {
-        //
+        $this->carCrudService->update($request->getData(), $car);
+        return redirect()->route('cars.index')->with('success', 'Car updated success');
     }
 
     /**
@@ -81,6 +95,7 @@ class CarController extends Controller
      */
     public function destroy(Car $car)
     {
-        //
+        $this->carCrudService->delete($car);
+        return redirect()->route('cars.index')->with('success', 'Car deleted success');
     }
 }

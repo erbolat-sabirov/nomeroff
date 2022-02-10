@@ -8,13 +8,13 @@ class ServiceDto extends BaseDto
 {
 
     public $title;
-    public $price;
+    public $description;
 
     public function dbData(): array
     {
         $data = [
             'title' => $this->title,
-            'price' => $this->price
+            'description' => $this->description
         ];
 
         return del_arr_elem_if_null($data);

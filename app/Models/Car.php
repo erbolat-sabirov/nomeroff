@@ -32,6 +32,10 @@ use App\Filters\CarFilter;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CarService[] $carServices
  * @property-read int|null $car_services_count
+ * @property-read \App\Models\CarModel|null $model
+ * @property-read \App\Models\CarType|null $type
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Washing[] $washings
+ * @property-read int|null $washings_count
  */
 class Car extends BaseModel
 {
@@ -41,8 +45,23 @@ class Car extends BaseModel
         return CarFilter::class;
     }
 
-    public function carServices()
+    public function washings()
     {
-        return $this->hasMany(CarService::class);
+        return $this->hasMany(Washing::class);
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(CarType::class);
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo(CarBrand::class);
+    }
+
+    public function model()
+    {
+        return $this->belongsTo(CarModel::class);
     }
 }

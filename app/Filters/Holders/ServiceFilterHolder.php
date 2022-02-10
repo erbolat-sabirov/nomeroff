@@ -8,5 +8,5 @@ class ServiceFilterHolder extends BaseFilterHolder
 {
 
     public $title;
-    public $price;
+    public $description;
 }
