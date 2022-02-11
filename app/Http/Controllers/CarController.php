@@ -49,7 +49,7 @@ class CarController extends Controller
     public function store(StoreCarRequest $request)
     {
         $this->carCrudService->create($request->getData());
-        return redirect()->route('car.index')->with('success', 'Car success created');
+        return redirect()->route('cars.index')->with('success', 'Машина успешно добавлена');
     }
 
     /**
@@ -84,7 +84,7 @@ class CarController extends Controller
     public function update(UpdateCarRequest $request, Car $car)
     {
         $this->carCrudService->update($request->getData(), $car);
-        return redirect()->route('cars.index')->with('success', 'Car updated success');
+        return redirect()->route('cars.index')->with('success', 'Машина успешно обновлена');
     }
 
     /**
@@ -96,6 +96,6 @@ class CarController extends Controller
     public function destroy(Car $car)
     {
         $this->carCrudService->delete($car);
-        return redirect()->route('cars.index')->with('success', 'Car deleted success');
+        return redirect()->route('cars.index')->with('success', 'Машина успешно удалена');
     }
 }

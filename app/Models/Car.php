@@ -58,17 +58,17 @@ class Car extends BaseModel
         return $this->hasMany(Washing::class);
     }
 
-    public function type()
+    public function carType()
     {
         return $this->belongsTo(CarType::class);
     }
 
-    public function brand()
+    public function carBrand()
     {
         return $this->belongsTo(CarBrand::class);
     }
 
-    public function model()
+    public function carModel()
     {
         return $this->belongsTo(CarModel::class);
     }
