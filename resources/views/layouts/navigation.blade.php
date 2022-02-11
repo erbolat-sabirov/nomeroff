@@ -24,6 +24,9 @@
                     <x-nav-link :href="route('car-type.index')" :active="request()->routeIs('car-type.index')">
                         Тип Машины
                     </x-nav-link>
+                    <x-nav-link :href="route('car-model.index')" :active="request()->routeIs('car-model.index')">
+                        Модель Машины
+                    </x-nav-link>
                 </div>
             </div>
 
