@@ -28,7 +28,7 @@ class CarEditViewModel extends BaseViewModel
 
     public function model()
     {
-        return new CarDto($this->data ?: $this->car->toArray());
+        return new CarDto($this->data ?: $this->model->toArray());
     }
 
     public function types()
