@@ -71,7 +71,7 @@ class CarController extends Controller
      */
     public function edit(Request $request, Car $car)
     {
-        return view('car.edit', new CarEditViewModel($this->carCrudService, $request->old(), $car));
+        return view('car.edit', new CarEditViewModel($this->carCrudService, $request->old(), $car), ['car' => $car]);
     }
 
     /**
