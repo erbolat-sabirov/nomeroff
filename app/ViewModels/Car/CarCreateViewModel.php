@@ -21,7 +21,7 @@ class CarCreateViewModel extends BaseViewModel
     {
         $this->carTypeService = app(CarTypeCrudService::class);
         $this->carBrandService = app(CarBrandCrudService::class);
-        $this->carTypeService = app(CarModelCrudService::class);
+        $this->carModelService = app(CarModelCrudService::class);
     }
 
 
