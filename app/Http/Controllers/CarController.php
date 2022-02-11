@@ -27,7 +27,7 @@ class CarController extends Controller
      */
     public function index(Request $request)
     {
-        return view('cars.index', new CarListViewModel($this->carCrudService, $request->all()));
+        return view('car.index', new CarListViewModel($this->carCrudService, $request->all()));
     }
 
     /**
@@ -49,7 +49,7 @@ class CarController extends Controller
     public function store(StoreCarRequest $request)
     {
         $this->carCrudService->create($request->getData());
-        return redirect()->route('cars.index')->with('success', 'Car success created');
+        return redirect()->route('car.index')->with('success', 'Car success created');
     }
 
     /**

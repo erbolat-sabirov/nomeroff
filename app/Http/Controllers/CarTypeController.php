@@ -47,7 +47,7 @@ class CarTypeController extends Controller
     public function store(StoreCarTypeRequest $request)
     {
         $this->carTypeCrudService->create($request->getData());
-        return redirect()->route('car-types.index')->with('success', 'Car Type success created');
+        return redirect()->route('car-type.index')->with('success', 'Тип машины создан успешно');
     }
 
     /**
@@ -69,7 +69,7 @@ class CarTypeController extends Controller
      */
     public function edit(Request $request, CarType $carType)
     {
-        return view('car-type.edit', new CarTypeEditViewModel(service:$this->carTypeCrudService, data:$request->old(), model:$carType));
+        return view('car-type.edit', new CarTypeEditViewModel(service:$this->carTypeCrudService, data:$request->old(), model:$carType), ['carType' => $carType]);
     }
 
     /**
@@ -82,7 +82,7 @@ class CarTypeController extends Controller
     public function update(UpdateCarTypeRequest $request, CarType $carType)
     {
         $this->carTypeCrudService->update($request->getData(), $carType);
-        return redirect()->route('car-types.index')->with('success', 'Car Type updated success');
+        return redirect()->route('car-type.index')->with('success', 'Тип машины успешно обновлён');
     }
 
     /**
@@ -94,6 +94,6 @@ class CarTypeController extends Controller
     public function destroy(CarType $carType)
     {
         $this->carTypeCrudService->delete($carType);
-        return redirect()->route('car-types.index')->with('success', 'Car Type deleted success');
+        return redirect()->route('car-type.index')->with('success', 'Тип машины успешно удалён');
     }
 }

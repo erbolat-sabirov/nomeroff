@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('services.index')" :active="request()->routeIs('services.index')">
                         Услуги
                     </x-nav-link>
+                    <x-nav-link :href="route('car-type.index')" :active="request()->routeIs('car-type.index')">
+                        Тип Машины
+                    </x-nav-link>
                 </div>
             </div>
 
