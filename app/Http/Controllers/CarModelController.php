@@ -48,7 +48,7 @@ class CarModelController extends Controller
     public function store(StoreCarModelRequest $request)
     {
         $this->carModelCrudService->create($request->getData());
-        return redirect()->route('car-models.index')->with('success', 'Car Model success created');
+        return redirect()->route('car-model.index')->with('success', 'Модель машины успешно создана');
     }
 
     /**
@@ -59,7 +59,7 @@ class CarModelController extends Controller
      */
     public function show(CarModel $carModel)
     {
-        
+
     }
 
     /**
@@ -70,7 +70,7 @@ class CarModelController extends Controller
      */
     public function edit(Request $request, CarModel $carModel)
     {
-        return view('car-model.edit', new CarModelEditViewModel(service:$this->carModelCrudService, data:$request->old(), model:$carModel));
+        return view('car-model.edit', new CarModelEditViewModel(service:$this->carModelCrudService, data:$request->old(), model:$carModel), ['carModel' => $carModel]);
     }
 
     /**
@@ -83,7 +83,7 @@ class CarModelController extends Controller
     public function update(UpdateCarModelRequest $request, CarModel $carModel)
     {
         $this->carModelCrudService->update($request->getData(), $carModel);
-        return redirect()->route('car-models.index')->with('success', 'Car Model updated success');
+        return redirect()->route('car-model.index')->with('success', 'Модель машины успешно обновлена');
     }
 
     /**
@@ -95,6 +95,6 @@ class CarModelController extends Controller
     public function destroy(CarModel $carModel)
     {
         $this->carModelCrudService->delete($carModel);
-        return redirect()->route('car-models.index')->with('success', 'Car Model deleted success');
+        return redirect()->route('car-model.index')->with('success', 'Модель машины успешно удалена');
     }
 }
