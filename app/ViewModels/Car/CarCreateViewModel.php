@@ -3,11 +3,13 @@
 namespace App\ViewModels\Car;
 
 use App\Base\BaseCrud;
+use App\Base\BaseModel;
 use App\Base\BaseViewModel;
 use App\Dto\CarDto;
 use App\Services\Crud\CarBrandCrudService;
 use App\Services\Crud\CarModelCrudService;
 use App\Services\Crud\CarTypeCrudService;
+use Illuminate\Http\Request;
 
 class CarCreateViewModel extends BaseViewModel
 {
@@ -15,7 +17,7 @@ class CarCreateViewModel extends BaseViewModel
     public $carBrandService;
     public $carModelService;
 
-    public function __construct(public ?BaseCrud $service = null, public array $data = [])
+    public function __construct(public ?BaseCrud $service = null, public array|Request $data = [], public ?BaseModel $model = null)
     {
         $this->carTypeService = app(CarTypeCrudService::class);
         $this->carBrandService = app(CarBrandCrudService::class);

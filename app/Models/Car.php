@@ -36,6 +36,14 @@ use App\Filters\CarFilter;
  * @property-read \App\Models\CarType|null $type
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Washing[] $washings
  * @property-read int|null $washings_count
+ * @property int|null $car_type_id
+ * @property int|null $car_brand_id
+ * @property int|null $car_model_id
+ * @property string|null $description
+ * @method static \Illuminate\Database\Eloquent\Builder|Car whereCarBrandId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Car whereCarModelId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Car whereCarTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Car whereDescription($value)
  */
 class Car extends BaseModel
 {

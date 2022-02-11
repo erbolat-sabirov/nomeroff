@@ -16,6 +16,14 @@ use App\Filters\CarModelFilter;
  * @method static \Illuminate\Database\Eloquent\Builder|CarModel newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|CarModel query()
  * @mixin \Eloquent
+ * @property int $id
+ * @property string $title
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|CarModel whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarModel whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarModel whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarModel whereUpdatedAt($value)
  */
 class CarModel extends BaseModel
 {

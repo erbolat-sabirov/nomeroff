@@ -12,6 +12,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|ServiceId newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ServiceId query()
  * @mixin \Eloquent
+ * @property int $service_id
+ * @property int $service_item_id
+ * @method static \Illuminate\Database\Eloquent\Builder|ServiceId whereServiceId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ServiceId whereServiceItemId($value)
  */
 class ServiceId extends Model
 {

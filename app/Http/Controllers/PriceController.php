@@ -5,17 +5,27 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePriceRequest;
 use App\Http\Requests\UpdatePriceRequest;
 use App\Models\Price;
+use App\Services\Crud\PriceCrudService;
+use App\ViewModels\Price\PriceCreateViewModel;
+use App\ViewModels\Price\PriceListViewModel;
+use Illuminate\Http\Request;
 
 class PriceController extends Controller
 {
+
+    public function __construct(private PriceCrudService $priceCrudService)
+    {
+        $this->authorizeResource(CarBrand::class, 'car_brand');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return view('price.index', new PriceListViewModel(service:$this->priceCrudService, data:$request->all()));
     }
 
     /**
@@ -23,9 +33,9 @@ class PriceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        return view('price.create', new PriceCreateViewModel(service:$this->priceCrudService, data:$request->old()));
     }
 
     /**
@@ -36,7 +46,7 @@ class PriceController extends Controller
      */
     public function store(StorePriceRequest $request)
     {
-        //
+        // $this->priceCrudService->createMany($request);
     }
 
     /**

@@ -14,6 +14,15 @@ use App\Filters\ServiceFilter;
  * @method static \Illuminate\Database\Eloquent\Builder|ServiceItem newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ServiceItem query()
  * @mixin \Eloquent
+ * @property int $id
+ * @property string $title
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Price|null $price
+ * @method static \Illuminate\Database\Eloquent\Builder|ServiceItem whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ServiceItem whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ServiceItem whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ServiceItem whereUpdatedAt($value)
  */
 class ServiceItem extends BaseModel
 {
@@ -21,5 +30,10 @@ class ServiceItem extends BaseModel
     public function queryFilterClass(): string
     {
         return ServiceFilter::class;
+    }
+
+    public function price()
+    {
+        return $this->morphOne(Price::class, 'priceable');
     }
 }

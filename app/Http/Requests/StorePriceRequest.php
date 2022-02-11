@@ -13,7 +13,7 @@ class StorePriceRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,18 @@ class StorePriceRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'amount' => [
+                'required',
+                'numeric'
+            ],
+            'priceable_id' => [
+                'required',
+                'integer'
+            ],
+            'priceable_type' => [
+                'required',
+                'string'
+            ]
         ];
     }
 }

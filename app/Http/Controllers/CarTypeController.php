@@ -16,6 +16,7 @@ class CarTypeController extends Controller
 
     public function __construct(public CarTypeCrudService $carTypeCrudService)
     {
+        $this->authorizeResource(CarType::class, 'car_type');
     }
 
     /**

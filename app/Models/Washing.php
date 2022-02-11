@@ -16,6 +16,18 @@ use App\Filters\WashingFilter;
  * @method static \Illuminate\Database\Eloquent\Builder|Washing newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Washing query()
  * @mixin \Eloquent
+ * @property int $id
+ * @property int $car_id
+ * @property int|null $service_id
+ * @property string $status
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Washing whereCarId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Washing whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Washing whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Washing whereServiceId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Washing whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Washing whereUpdatedAt($value)
  */
 class Washing extends BaseModel
 {
