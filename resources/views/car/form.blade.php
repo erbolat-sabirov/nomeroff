@@ -11,7 +11,7 @@
 </div>
 
 <div class="mb-4">
-    <label for="car_brand_id" class="block mb-2 text-sm font-medium text-gray-900">Тип Машины</label>
+    <label for="car_brand_id" class="block mb-2 text-sm font-medium text-gray-900">Бренд Машины</label>
     <select id="car_brand_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('car_brand_id') border-red-800 @enderror" name="car_brand_id" required>
         @foreach($brands as $key => $value)
             <option value="{{ $key }}" @if($key == $model->car_brand_id) selected @endif>{{ $value }}</option>
@@ -23,7 +23,7 @@
 </div>
 
 <div class="mb-4">
-    <label for="car_model_id" class="block mb-2 text-sm font-medium text-gray-900">Тип Машины</label>
+    <label for="car_model_id" class="block mb-2 text-sm font-medium text-gray-900">Модель Машины</label>
     <select id="car_model_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('car_model_id') border-red-800 @enderror" name="car_model_id" required>
         @foreach($carModels as $key => $value)
             <option value="{{ $key }}" @if($key == $model->car_model_id) selected @endif>{{ $value }}</option>

@@ -37,4 +37,9 @@ class CarModel extends BaseModel
     {
         return $this->hasMany(Car::class);
     }
+
+    public function carBrand()
+    {
+        return $this->belongsTo(CarBrand::class);
+    }
 }
