@@ -18,7 +18,7 @@ class UpdateServiceRequest extends BaseRequest
     {
         return [
             'title' => ['nullable', 'string'],
-            'price' => ['nullable', 'numeric']
+            'description' => ['nullable', 'string']
         ];
     }
 
