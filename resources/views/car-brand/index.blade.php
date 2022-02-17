@@ -13,7 +13,7 @@
             <x-package-alert/>
         @endif
         <div class="flex justify-start mb-4 mt-2">
-            <a class="px-4 py-2 rounded-md bg-sky-500 text-sky-100 hover:bg-sky-600" href="{{ route('car-brand.create') }}">Создать бренд машины</a>
+            <a class="px-4 py-2 rounded-md bg-sky-500 text-sky-100 hover:bg-sky-600" href="{{ route('car-brands.create') }}">Создать бренд машины</a>
         </div>
         @forelse($models as $carBrand)
             @if($loop->first)
@@ -55,12 +55,12 @@
                                     </td>
 
                                     <td class="text-sm font-medium leading-5 text-center whitespace-no-wrap border-b border-gray-200 ">
-                                        <a href="{{ route('car-brand.edit', $carBrand) }}" class="px-4 py-2 rounded-md bg-sky-500 text-sky-100 hover:bg-sky-600">
+                                        <a href="{{ route('car-brands.edit', $carBrand) }}" class="px-4 py-2 rounded-md bg-sky-500 text-sky-100 hover:bg-sky-600">
                                             Редактировать
                                         </a>
                                     </td>
                                     <td class="text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200 ">
-                                        <form action="{{ route('car-brand.destroy', $carBrand) }}" method="post" onSubmit="if(!confirm('Вы действительно хотите удалить бренд машины?')){return false;}">
+                                        <form action="{{ route('car-brands.destroy', $carBrand) }}" method="post" onSubmit="if(!confirm('Вы действительно хотите удалить бренд машины?')){return false;}">
                                             @csrf
                                             @method("DELETE")
                                             <button type="submit" class="px-4 py-2 rounded-md bg-red-500 text-red-100 hover:bg-red-600">

@@ -49,7 +49,7 @@ class CarBrandController extends Controller
     public function store(StoreCarBrandRequest $request)
     {
         $this->carBrandCrudService->create($request->getData());
-        return redirect()->route('car-brand.index')->with('success', 'Бренд машины создан успешно');
+        return redirect()->route('car-brands.index')->with('success', 'Бренд машины создан успешно');
     }
 
     /**
@@ -84,7 +84,7 @@ class CarBrandController extends Controller
     public function update(UpdateCarBrandRequest $request, CarBrand $carBrand)
     {
         $this->carBrandCrudService->update($request->getData(), $carBrand);
-        return redirect()->route('car-brand.index')->with('success', 'Бренд машины создан обновлён');
+        return redirect()->route('car-brands.index')->with('success', 'Бренд машины создан обновлён');
     }
 
     /**
@@ -96,6 +96,6 @@ class CarBrandController extends Controller
     public function destroy(CarBrand $carBrand)
     {
         $this->carBrandCrudService->delete($carBrand);
-        return redirect()->route('car-brand.index')->with('success', 'Бренд машины создан удалён');
+        return redirect()->route('car-brands.index')->with('success', 'Бренд машины создан удалён');
     }
 }
