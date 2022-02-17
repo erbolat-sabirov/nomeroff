@@ -27,6 +27,8 @@ use App\Filters\PriceFilter;
  * @method static \Illuminate\Database\Eloquent\Builder|Price wherePriceableId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Price wherePriceableType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Price whereUpdatedAt($value)
+ * @property int $service_car_type_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Price whereServiceCarTypeId($value)
  */
 class Price extends BaseModel
 {

@@ -21,6 +21,11 @@ class UpdateCarModelRequest extends BaseRequest
             'title' => [
                 'required',
                 'string'
+            ],
+            'car_brand_id' => [
+                'nullable',
+                'integer',
+                'exists:App\Models\CarBrand,id'
             ]
         ];
     }

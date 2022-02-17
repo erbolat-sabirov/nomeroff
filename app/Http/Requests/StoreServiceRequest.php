@@ -19,7 +19,7 @@ class StoreServiceRequest extends BaseRequest
     {
         return [
             'title' => ['required', 'string'],
-            'price' => ['required', 'numeric']
+            'description' => ['required', 'string']
         ];
     }
 

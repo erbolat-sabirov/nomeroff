@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $service_item_id
  * @method static \Illuminate\Database\Eloquent\Builder|ServiceId whereServiceId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ServiceId whereServiceItemId($value)
+ * @method static \Database\Factories\ServiceIdFactory factory(...$parameters)
  */
 class ServiceId extends Model
 {

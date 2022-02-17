@@ -30,6 +30,8 @@ use App\Filters\ServiceFilter;
  * @method static \Illuminate\Database\Eloquent\Builder|Service whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Service whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ServiceCarType[] $serviceCarTypes
+ * @property-read int|null $service_car_types_count
  */
 class Service extends BaseModel
 {

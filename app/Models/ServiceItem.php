@@ -23,6 +23,10 @@ use App\Filters\ServiceFilter;
  * @method static \Illuminate\Database\Eloquent\Builder|ServiceItem whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ServiceItem whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ServiceItem whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ServiceCarType[] $serviceCarTypes
+ * @property-read int|null $service_car_types_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Service[] $services
+ * @property-read int|null $services_count
  */
 class ServiceItem extends BaseModel
 {

@@ -25,6 +25,8 @@ use App\Filters\CarTypeFilter;
  * @method static \Illuminate\Database\Eloquent\Builder|CarType whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CarType whereUpdatedAt($value)
  * @property-read \App\Models\Price|null $price
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ServiceCarType[] $serviceCarType
+ * @property-read int|null $service_car_type_count
  */
 class CarType extends BaseModel
 {

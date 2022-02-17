@@ -12,9 +12,12 @@
         @if(session('success'))
             <x-package-alert/>
         @endif
+        <div class="flex justify-start mb-4 mt-2">
+            <a class="px-4 py-2 rounded-md bg-sky-500 text-sky-100 hover:bg-sky-600" href="{{ route('cars.create') }}">Создать машину</a>
+        </div>
         @forelse($models as $car)
             @if($loop->first)
-                <div class="flex flex-col">
+                <div class="flex flex-col mb-4">
                     <div class="overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
                         <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
                             <table class="min-w-full">
@@ -112,8 +115,5 @@
         @empty
             Машины отсутствуют
         @endforelse
-        <div class="flex justify-end mt-2">
-            <a class="px-4 py-2 rounded-md bg-sky-500 text-sky-100 hover:bg-sky-600" href="{{ route('cars.create') }}">Создать машину</a>
-        </div>
     </x-slot>
 </x-app-layout>

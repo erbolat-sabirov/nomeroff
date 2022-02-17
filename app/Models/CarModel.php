@@ -24,6 +24,9 @@ use App\Filters\CarModelFilter;
  * @method static \Illuminate\Database\Eloquent\Builder|CarModel whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CarModel whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CarModel whereUpdatedAt($value)
+ * @property int $car_brand_id
+ * @property-read \App\Models\CarBrand $carBrand
+ * @method static \Illuminate\Database\Eloquent\Builder|CarModel whereCarBrandId($value)
  */
 class CarModel extends BaseModel
 {
@@ -36,5 +39,10 @@ class CarModel extends BaseModel
     public function cars()
     {
         return $this->hasMany(Car::class);
+    }
+
+    public function carBrand()
+    {
+        return $this->belongsTo(CarBrand::class);
     }
 }
