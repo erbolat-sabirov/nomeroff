@@ -2,9 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\Service;
+use App\Models\ServiceItem;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ServiceFactory extends Factory
+class ServiceIdFactory  extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,8 +16,8 @@ class ServiceFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->text(50),
-            'description' => $this->faker->text()
+            'service_id' => Service::inRandomOrder()->first()->id,
+            'service_item_id' => ServiceItem::inRandomOrder()->first()->id
         ];
     }
 }

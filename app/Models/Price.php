@@ -36,8 +36,4 @@ class Price extends BaseModel
         return PriceFilter::class;
     }
 
-    public function priceable()
-    {
-        return $this->morphTo();
-    }
 }

@@ -14,13 +14,13 @@ use Illuminate\Http\Request;
 class CarEditViewModel extends BaseViewModel
 {
 
-    public $carTypeService;
+    public $ServiceCarType;
     public $carBrandService;
     public $carModelService;
 
     public function __construct(public ?BaseCrud $service = null, public array|Request $data = [], public ?BaseModel $model = null)
     {
-        $this->carTypeService = app(CarTypeCrudService::class);
+        $this->ServiceCarType = app(CarTypeCrudService::class);
         $this->carBrandService = app(CarBrandCrudService::class);
         $this->carModelService = app(CarModelCrudService::class);
     }
@@ -33,7 +33,7 @@ class CarEditViewModel extends BaseViewModel
 
     public function types()
     {
-        return $this->carTypeService->list()->pluck('title', 'id');
+        return $this->ServiceCarType->list()->pluck('title', 'id');
     }
 
     public function brands()

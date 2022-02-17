@@ -24,6 +24,7 @@ use App\Filters\CarTypeFilter;
  * @method static \Illuminate\Database\Eloquent\Builder|CarType whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CarType whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CarType whereUpdatedAt($value)
+ * @property-read \App\Models\Price|null $price
  */
 class CarType extends BaseModel
 {
@@ -38,8 +39,8 @@ class CarType extends BaseModel
         return $this->hasMany(Car::class);
     }
 
-    public function price()
+    public function serviceCarType()
     {
-        return $this->morphOne(Price::class, 'priceable');
+        return $this->hasMany(ServiceCarType::class);
     }
 }

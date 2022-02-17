@@ -44,6 +44,9 @@ use App\Filters\CarFilter;
  * @method static \Illuminate\Database\Eloquent\Builder|Car whereCarModelId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Car whereCarTypeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Car whereDescription($value)
+ * @property-read \App\Models\CarBrand|null $carBrand
+ * @property-read \App\Models\CarModel|null $carModel
+ * @property-read \App\Models\CarType|null $carType
  */
 class Car extends BaseModel
 {

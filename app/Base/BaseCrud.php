@@ -2,6 +2,7 @@
 
 namespace App\Base;
 
+use App\Interfaces\DtoInsertInterface;
 use App\Interfaces\DtoInterface;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -20,7 +21,7 @@ abstract class BaseCrud
     {
         $class = $this->getModelClass();
         $model = new $class();
-        $model->create($data->dbData());
+        $model = $model->create($data->dbData());
         return $model;
     }
 
@@ -36,6 +37,14 @@ abstract class BaseCrud
     {
         $model = $this->find($model);
         return $model->delete();
+    }
+
+    public function insert(DtoInsertInterface $dto): bool
+    {
+        $class = $this->getModelClass();
+        $model = new $class();
+
+        return $model::insert($dto->dbManyData()); 
     }
 
     /**

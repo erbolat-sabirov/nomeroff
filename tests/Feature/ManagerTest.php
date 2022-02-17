@@ -110,7 +110,7 @@ class ManagerTest extends TestCase
         $manager = User::factory()->create();
 
         $response = $this->delete(route('managers.destroy', $manager));
-        $response->assertSessionHas('success', 'Success deleted');
+        $response->assertSessionHas('success', 'Успешно удалено');
         $response->assertStatus(302);
     }
 }

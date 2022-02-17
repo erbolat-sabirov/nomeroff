@@ -2,19 +2,13 @@
 
 namespace App\Http\Requests;
 
+use App\Base\BaseRequest;
+use App\Dto\PriceDto;
+use App\Interfaces\DtoInterface;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePriceRequest extends FormRequest
+class StorePriceRequest extends BaseRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -24,18 +18,28 @@ class StorePriceRequest extends FormRequest
     public function rules()
     {
         return [
-            'amount' => [
+            'types' => [
+                'required',
+                'array',
+            ],
+            'types.*.amount' => [
                 'required',
                 'numeric'
             ],
-            'priceable_id' => [
+            'service_id' => [
                 'required',
                 'integer'
             ],
-            'priceable_type' => [
+            'model' => [
                 'required',
                 'string'
             ]
         ];
     }
+
+    public function getData(): DtoInterface
+    {
+        return new PriceDto($this->all());
+    }
+
 }

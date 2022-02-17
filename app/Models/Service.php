@@ -48,8 +48,9 @@ class Service extends BaseModel
         return $this->hasManyThrough(ServiceItem::class, ServiceId::class, 'service_id', 'id', 'id', 'service_item_id');
     }
 
-    public function price()
+    public function serviceCarTypes()
     {
-        return $this->morphOne(Price::class, 'priceable');
+        return $this->morphMany(ServiceCarType::class, 'serviceable')->with(['price', 'carType']);
     }
+
 }

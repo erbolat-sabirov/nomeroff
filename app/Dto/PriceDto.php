@@ -8,17 +8,27 @@ class PriceDto extends BaseDto
 {
     
     public $amount;
-    public $priceable_id;
-    public $priceable_type;
-
+    public $service_car_type_id;
+    public $types;
+    public $service_id;
+    public $model;
+    
     public function dbData(): array
     {
         $data = [
             'amount' => $this->amount,
-            'priceable_id' => $this->priceable_id,
-            'priceable_type' => $this->priceable_type,
+            'service_car_type_id' => $this->service_car_type_id,
         ];
 
         return del_arr_elem_if_null($data);
+    }
+
+    public function getTypesData(): array
+    {
+        return [
+            'types' => $this->types,
+            'serviceable_id' => $this->service_id,
+            'serviceable_type' => $this->model
+        ];
     }
 }

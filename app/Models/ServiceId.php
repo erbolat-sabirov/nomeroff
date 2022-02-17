@@ -20,4 +20,6 @@ use Illuminate\Database\Eloquent\Model;
 class ServiceId extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
 }

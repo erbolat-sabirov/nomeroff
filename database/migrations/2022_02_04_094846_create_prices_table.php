@@ -15,10 +15,11 @@ class CreatePricesTable extends Migration
     {
         Schema::create('prices', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('service_car_type_id');
             $table->decimal('amount');
-            $table->unsignedBigInteger('priceable_id');
-            $table->string('priceable_type');
             $table->timestamps();
+
+            $table->foreign('service_car_type_id')->references('id')->on('service_car_types')->cascadeOnDelete();
         });
     }
 

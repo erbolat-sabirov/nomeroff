@@ -30,9 +30,9 @@
                             </button>
                             <div x-show="show" class="mt-2 py-2 bg-white rounded-lg shadow-xl absolute">
                                 <a href="{{ route('cars.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Машины</a>
-                                <a href="{{ route('car-type.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Тип</a>
-                                <a href="{{ route('car-brand.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Бренд</a>
-                                <a href="{{ route('car-model.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Модель</a>
+                                <a href="{{ route('car-types.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Тип</a>
+                                <a href="{{ route('car-brands.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Бренд</a>
+                                <a href="{{ route('car-models.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Модель</a>
                             </div>
                         </div>
                     </div>
