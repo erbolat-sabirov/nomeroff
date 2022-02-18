@@ -12,6 +12,7 @@ class PriceDto extends BaseDto
     public $types;
     public $service_id;
     public $model;
+    public $service_items;
     
     public function dbData(): array
     {
@@ -28,7 +29,17 @@ class PriceDto extends BaseDto
         return [
             'types' => $this->types,
             'serviceable_id' => $this->service_id,
-            'serviceable_type' => $this->model
+            'serviceable_type' => $this->model,
         ];
+    }
+
+    public function getServiceItemsData()
+    {
+        $data = [];
+        foreach ($this->service_items as $key => $item) {
+            $data[$key]['service_id'] = $this->service_id; 
+            $data[$key]['service_item_id'] = $item['id']; 
+        }
+        return $data;
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Services\Crud;
 
 use App\Base\BaseCrud;
+use App\Base\BaseModel;
 use App\Dto\ServiceCarTypeDto;
 use App\Models\Service;
 use App\Models\ServiceCarType;
@@ -23,7 +24,7 @@ class ServiceCarTypeCrudService extends BaseCrud
         return $resData;
     }
 
-    public function deleteMany(Service $service)
+    public function deleteMany(BaseModel $service)
     {
         $serviceCarTypes = $service->serviceCarTypes;
 

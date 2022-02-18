@@ -4,6 +4,7 @@ namespace App\Services\Crud;
 
 use App\Base\BaseCrud;
 use App\Models\Service;
+use App\Models\ServiceId;
 
 class ServiceCrudService extends BaseCrud
 {
@@ -24,6 +25,16 @@ class ServiceCrudService extends BaseCrud
         $models = $this->query()->get();
 
         return $models;
+    }
+
+    public function createItemIds(array $data): bool
+    {
+        return ServiceId::insert($data);
+    }
+
+    public function deleteItemIds(int $servic_id)
+    {
+        ServiceId::where('service_id', $servic_id)->delete();
     }
     
 }
