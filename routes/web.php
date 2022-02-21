@@ -6,6 +6,7 @@ use App\Http\Controllers\CarModelController;
 use App\Http\Controllers\CarTypeController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ServiceItemController;
 use App\Http\Controllers\ServicePriceController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,11 +35,13 @@ Route::group([
 
     Route::resource('managers', ManagerController::class)->except(['show']);
     Route::resource('services', ServiceController::class)->except(['show']);
+    Route::resource('service-items', ServiceItemController::class)->except(['show']);
     Route::resource('car-types', CarTypeController::class)->except(['show']);
     Route::resource('car-models', CarModelController::class)->except(['show']);
     Route::resource('car-brands', CarBrandController::class)->except(['show']);
     Route::resource('cars', CarController::class);
     Route::resource('service-prices', ServicePriceController::class);
+    Route::resource('service-item-prices', ServicePriceController::class);
 });
 
 require __DIR__.'/auth.php';

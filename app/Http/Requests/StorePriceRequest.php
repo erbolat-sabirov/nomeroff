@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Base\BaseRequest;
 use App\Dto\PriceDto;
 use App\Interfaces\DtoInterface;
+use App\Models\ServiceItem;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StorePriceRequest extends BaseRequest
@@ -33,11 +34,20 @@ class StorePriceRequest extends BaseRequest
             'model' => [
                 'required',
                 'string'
-            ]
+            ],
+            'service_items' => [
+                'nullable',
+                'array'
+            ],
+            'service_items.*.id' => [
+                'nullable',
+                'integer',
+                'exists:' . ServiceItem::class . ',id'
+            ] 
         ];
     }
 
-    public function getData(): DtoInterface
+    public function getData(): PriceDto
     {
         return new PriceDto($this->all());
     }

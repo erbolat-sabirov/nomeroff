@@ -4,6 +4,7 @@ namespace App\ViewModels\Price;
 
 use App\Base\BaseViewModel;
 use App\Dto\PriceDto;
+use App\Models\ServiceItem;
 use App\Services\Crud\CarTypeCrudService;
 use App\Services\Crud\ServiceCrudService;
 
@@ -25,6 +26,11 @@ class PriceCreateViewModel extends BaseViewModel
     {
         $typeService = app(CarTypeCrudService::class);
         return $typeService->all();
+    }
+
+    public function allServiceItems()
+    {
+        return ServiceItem::all();
     }
 
 }

@@ -4,8 +4,8 @@ namespace App\ViewModels\Price;
 
 use App\Base\BaseViewModel;
 use App\Dto\PriceDto;
+use App\Models\ServiceItem;
 use App\Services\Crud\CarTypeCrudService;
-use App\Services\Crud\ServiceCrudService;
 
 class PriceEditViewModel extends BaseViewModel
 {
@@ -20,11 +20,19 @@ class PriceEditViewModel extends BaseViewModel
             $types[$value->carType->id]['amount'] = $value->price->id;
         }
 
+        $service_items = [];
+
+        foreach ($this->model->items as $key => $item) {
+            $service_items[$item->service_item_id]['id'] = $item->service_item_id;
+        }
+
         $data = [
             'model' => $this->data['model'] ?? get_class($this->model),
             'service_id' => $this->data['service_id'] ?? $this->model->id,
-            'types' => $this->data['types'] ?? $types
+            'types' => $this->data['types'] ?? $types,
+            'service_items' => $this->data['service_items'] ?? $service_items
         ];
+        
         return new PriceDto($data);
     }
 
@@ -38,5 +46,15 @@ class PriceEditViewModel extends BaseViewModel
     {
         $typeService = app(CarTypeCrudService::class);
         return $typeService->all();
+    }
+
+    public function allServiceItems()
+    {
+        return ServiceItem::all();
+    }
+
+    public function serviceItems()
+    {
+        return $this->model->items();
     }
 }

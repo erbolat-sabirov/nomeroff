@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Base\BaseRequest;
 use App\Dto\PriceDto;
-use App\Interfaces\DtoInterface;
+use App\Models\ServiceItem;
 
 class UpdatePriceRequest extends BaseRequest
 {
@@ -28,11 +28,16 @@ class UpdatePriceRequest extends BaseRequest
             'model' => [
                 'required',
                 'string'
+            ],
+            'service_items.*.id' => [
+                'nullable',
+                'integer',
+                'exists:' . ServiceItem::class . ',id'
             ]
         ];
     }
 
-    public function getData(): DtoInterface
+    public function getData(): PriceDto
     {
         $data = $this->all();
         $data['service_id'] = $this->route('service_price')->id;
