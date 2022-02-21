@@ -3,7 +3,7 @@
         <div class="container max-w-7xl mx-auto mt-8">
             <div class="mb-4">
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    Услуги
+                    Мини услуги
                 </h2>
             </div>
         </div>
@@ -14,7 +14,7 @@
             <x-package-alert/>
         @endif
         <div class="flex justify-start mb-4 mt-2">
-            <a class="px-4 py-2 rounded-md bg-sky-500 text-sky-100 hover:bg-sky-600" href="{{ route('services.create') }}">Создать услугу</a>
+            <a class="px-4 py-2 rounded-md bg-sky-500 text-sky-100 hover:bg-sky-600" href="{{ route('service-items.create') }}">Создать мини услугу</a>
         </div>
             @forelse($models as $service)
                 @if($loop->first)
@@ -30,9 +30,6 @@
                                         <th
                                             class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                             Название</th>
-                                        <th
-                                            class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                            Описание</th>
                                         <th
                                             class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                             Создан</th>
@@ -54,21 +51,17 @@
                                             {{ $service->title }}
                                         </td>
 
-                                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                            {{ $service->description }}
-                                        </td>
-
                                         <td class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200">
-                                            <span>{{ date('d-m-Y', strtotime($service->created_at)) }}</span>
+                                            <span>{{ date('d-m-Y h:i', strtotime($service->created_at)) }}</span>
                                         </td>
 
                                         <td class="text-sm font-medium leading-5 text-center whitespace-no-wrap border-b border-gray-200 ">
-                                            <a href="{{ route('services.edit', $service) }}" class="px-4 py-2 rounded-md bg-sky-500 text-sky-100 hover:bg-sky-600">
+                                            <a href="{{ route('service-items.edit', $service) }}" class="px-4 py-2 rounded-md bg-sky-500 text-sky-100 hover:bg-sky-600">
                                                 Редактировать
                                             </a>
                                         </td>
                                         <td class="text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200 ">
-                                            <form action="{{ route('services.destroy', $service) }}" method="post" onSubmit="if(!confirm('Вы действительно хотите удалить сервис?')){return false;}">
+                                            <form action="{{ route('service-items.destroy', $service) }}" method="post" onSubmit="if(!confirm('Вы действительно хотите удалить мини услугу?')){return false;}">
                                                 @csrf
                                                 @method("DELETE")
                                                 <button type="submit" class="px-4 py-2 rounded-md bg-red-500 text-red-100 hover:bg-red-600">
@@ -86,7 +79,7 @@
                     {{ $models->links() }}
                 @endif
             @empty
-                Услуги отсутствуют
+                Мини услуги отсутствуют
             @endforelse
     </x-slot>
 
