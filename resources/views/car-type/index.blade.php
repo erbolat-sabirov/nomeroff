@@ -51,7 +51,7 @@
                                     </td>
 
                                     <td class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200">
-                                        <span>{{ date('d-m-Y', strtotime($carType->created_at)) }}</span>
+                                        <span>{{ date('d-m-Y h:i', strtotime($carType->created_at)) }}</span>
                                     </td>
 
                                     <td class="text-sm font-medium leading-5 text-center whitespace-no-wrap border-b border-gray-200 ">
