@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ViewModels\CarType;
+namespace App\ViewModels\ServiceItem;
 
 use App\Base\BaseViewModel;
 

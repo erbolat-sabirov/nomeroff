@@ -6,9 +6,9 @@ use App\Http\Requests\StoreServiceItemRequest;
 use App\Http\Requests\UpdateServiceItemRequest;
 use App\Models\ServiceItem;
 use App\Services\Crud\ServiceItemCrudService;
-use App\ViewModels\CarType\ServiceItemCreateViewModel;
-use App\ViewModels\CarType\ServiceItemEditViewModel;
-use App\ViewModels\CarType\ServiceItemListViewModel;
+use App\ViewModels\ServiceItem\ServiceItemListViewModel;
+use App\ViewModels\ServiceItem\ServiceItemCreateViewModel;
+use App\ViewModels\ServiceItem\ServiceItemEditViewModel;
 use Illuminate\Http\Request;
 
 class ServiceItemController extends Controller
@@ -25,7 +25,7 @@ class ServiceItemController extends Controller
      */
     public function index(Request $request)
     {
-        return view('service-item.index', new ServiceItemListViewModel(service:$this->service, data:$this->request->all()));
+        return view('service-item.index', new ServiceItemListViewModel(service:$this->service, data:$request->all()));
     }
 
     /**
@@ -58,7 +58,7 @@ class ServiceItemController extends Controller
      */
     public function edit(Request $request, ServiceItem $service_item)
     {
-        return view('service-item.edit', new ServiceItemEditViewModel(service:$this->service, data:$request->old(), model:$service_item));
+        return view('service-item.edit', new ServiceItemEditViewModel(service:$this->service, data:$request->old(), model:$service_item), ['service_item' => $service_item]);
     }
 
     /**

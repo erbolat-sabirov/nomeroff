@@ -18,12 +18,20 @@
                     <x-nav-link :href="route('managers.index')" :active="request()->routeIs('managers.index')">
                         Менеджеры
                     </x-nav-link>
-                    <x-nav-link :href="route('services.index')" :active="request()->routeIs('services.index')">
-                        Услуги
-                    </x-nav-link>
-
                     <div class="h-screen flex justify-center">
-                        <div x-data="{show: false}" @click.away="show = false"> <button @click="show = ! show" class="mt-4 block rounded-lg px-3 text-sm py-2 overflow-hidden text-gray-500 hover:text-gray-700">
+                        <div x-data="{show: false}" @click.away="show = false"> <button @click="show = ! show" class="mt-4 block rounded-lg px-1 text-sm py-2 overflow-hidden text-gray-500 hover:text-gray-700">
+                                <div class="flex justify-between"> <span>Услуги</span> <svg class="fill-current text-gray-200" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                                        <path d="M7 10l5 5 5-5z" />
+                                        <path d="M0 0h24v24H0z" fill="none" /></svg> </div>
+                            </button>
+                            <div x-show="show" class="mt-2 py-2 bg-white rounded-lg shadow-xl absolute">
+                                <a href="{{ route('services.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Услуги</a>
+                                <a href="{{ route('service-items.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Мини услуги</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="h-screen flex justify-center">
+                        <div x-data="{show: false}" @click.away="show = false"> <button @click="show = ! show" class="mt-4 block rounded-lg px-1 text-sm py-2 overflow-hidden text-gray-500 hover:text-gray-700">
                                 <div class="flex justify-between"> <span>Машины</span> <svg class="fill-current text-gray-200" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
                                         <path d="M7 10l5 5 5-5z" />
                                         <path d="M0 0h24v24H0z" fill="none" /></svg> </div>
