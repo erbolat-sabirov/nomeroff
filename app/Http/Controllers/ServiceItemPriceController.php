@@ -8,7 +8,7 @@ use App\Models\Price;
 use App\Models\ServiceItem;
 use App\Services\Crud\PriceCrudService;
 use App\Services\Crud\ServiceCarTypeCrudService;
-use App\Services\Crud\ServiceCrudService;
+use App\Services\Crud\ServiceItemCrudService;
 use App\ViewModels\Price\PriceCreateViewModel;
 use App\ViewModels\Price\PriceEditViewModel;
 use App\ViewModels\Price\PriceListViewModel;
@@ -19,7 +19,7 @@ class ServiceItemPriceController extends Controller
 
     public function __construct(
         private PriceCrudService $priceCrudService, 
-        private ServiceCrudService $serviceCrudService, 
+        private ServiceItemCrudService $serviceItemCrudService, 
         private ServiceCarTypeCrudService $serviceCarTypeCrudService)
     {
         $this->authorizeResource(Price::class, 'price');
@@ -32,7 +32,7 @@ class ServiceItemPriceController extends Controller
      */
     public function index(Request $request)
     {
-        return view('service-item-price.index', new PriceListViewModel(service:$this->serviceCrudService, data:$request->all()));
+        return view('service-item-price.index', new PriceListViewModel(service:$this->serviceItemCrudService, data:$request->all()));
     }
 
     /**

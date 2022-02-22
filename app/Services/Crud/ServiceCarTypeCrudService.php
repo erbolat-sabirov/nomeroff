@@ -35,12 +35,4 @@ class ServiceCarTypeCrudService extends BaseCrud
         return true;
     }
 
-    public function list(array $data = [])
-    {
-        $models = $this->query()
-                    ->filter($data)
-                    ->with(['serviceable', 'price'])
-                    ->paginate();
-        return $models;
-    }
 }
