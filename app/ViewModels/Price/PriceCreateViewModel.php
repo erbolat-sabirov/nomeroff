@@ -7,6 +7,7 @@ use App\Dto\PriceDto;
 use App\Models\ServiceItem;
 use App\Services\Crud\CarTypeCrudService;
 use App\Services\Crud\ServiceCrudService;
+use App\Services\Crud\ServiceItemCrudService;
 
 class PriceCreateViewModel extends BaseViewModel
 {
@@ -30,7 +31,7 @@ class PriceCreateViewModel extends BaseViewModel
 
     public function allServiceItems()
     {
-        return ServiceItem::all();
+        return app(ServiceItemCrudService::class)->all();
     }
 
 }

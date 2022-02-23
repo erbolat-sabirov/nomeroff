@@ -6,6 +6,7 @@ use App\Base\BaseViewModel;
 use App\Dto\PriceDto;
 use App\Models\ServiceItem;
 use App\Services\Crud\CarTypeCrudService;
+use App\Services\Crud\ServiceItemCrudService;
 
 class PriceEditViewModel extends BaseViewModel
 {
@@ -52,7 +53,7 @@ class PriceEditViewModel extends BaseViewModel
 
     public function allServiceItems()
     {
-        return ServiceItem::all();
+        return app(ServiceItemCrudService::class)->all();
     }
 
     public function serviceItems()
