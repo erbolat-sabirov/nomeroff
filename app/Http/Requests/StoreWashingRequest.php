@@ -46,11 +46,11 @@ class StoreWashingRequest extends BaseRequest
                 'integer',
                 'exists:' . ServiceItem::class . ',id'
             ],
-            'users' => [
+            'washing_users' => [
                 'required',
                 'array'
             ],
-            'users.*.id' => [
+            'washing_users.*.user_id' => [
                 'required',
                 'integer',
                 'exists:' . User::class . ',id'

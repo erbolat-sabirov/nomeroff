@@ -26,12 +26,23 @@ class WashingCrudService extends BaseCrud
         return $model->items()->delete();
     }
 
-    public function createWashedUsers(WashingDto $dto, Washing $washing): bool
+    public function createWashingUsers(WashingDto $dto, Washing $model): Washing
     {
-        $data = [];
-        foreach ($dto->getUsers() as $key => $user) {
-            $data[] = ['washing_id' => $washing->id, 'user_id' => $user['id']];
+
+        if (!empty($dto->getUsers())) {
+            $model->usersThrough()->createMany($dto->getUsers());
         }
-        return WashingUser::insert($data);
+
+        return $model;
+    }
+
+    public function deleteWashingUsers(Washing $model){
+        return $model->items()->delete();
+    }
+
+    public function deleteRelations(Washing $model)
+    {
+        $this->deleteServiceItems($model);
+        $this->deleteWashingUsers($model);
     }
 }

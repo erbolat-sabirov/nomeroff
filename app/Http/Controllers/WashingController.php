@@ -9,6 +9,7 @@ use App\Services\Crud\WashingCrudService;
 use App\ViewModels\Washing\WashingCreateViewModel;
 use App\ViewModels\Washing\WashingEditViewModel;
 use App\ViewModels\Washing\WashingListViewModel;
+use DB;
 use Illuminate\Http\Request;
 
 class WashingController extends Controller
@@ -46,10 +47,19 @@ class WashingController extends Controller
      */
     public function store(StoreWashingRequest $request)
     {
-        $model = $this->washingCrudService->create($request->getData());
-        $this->washingCrudService->createServiceItems($model, $request->getData());
-        $this->washingCrudService->createWashedUsers($request->getData(), $model);
-        return redirect()->route('washings.index')->with('success', 'Created');
+        try {
+            DB::transaction(function() use ($request) {
+                $model = $this->washingCrudService->create($request->getData());
+                $this->washingCrudService->createServiceItems($model, $request->getData());
+                $this->washingCrudService->createWashingUsers($request->getData(), $model);
+            });
+
+            return redirect()->route('washings.index')->with('success', 'Created');
+
+        } catch (\Exception $e) {
+            throw $e;
+        }
+
     }
 
     /**
@@ -83,8 +93,11 @@ class WashingController extends Controller
      */
     public function update(UpdateWashingRequest $request, Washing $washing)
     {
-        $model = $this->washingCrudService->update($request->getData(), $washing);
-        $this->washingCrudService->createServiceItems($model, $request->getData());
+        DB::transaction(function() use ($request, $washing){
+            $model = $this->washingCrudService->update($request->getData(), $washing);
+            $this->washingCrudService->createServiceItems($model, $request->getData());
+            $this->washingCrudService->createWashingUsers($request->getData(), $model);
+        });
         return redirect()->route('washings.index')->with('success', 'Updated');
     }
 

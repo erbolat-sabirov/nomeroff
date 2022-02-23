@@ -107,4 +107,9 @@ class Washing extends BaseModel
             'user_id'
         );
     }
+
+    public function usersThrough()
+    {
+        return $this->hasMany(WashingUser::class);
+    }
 }
