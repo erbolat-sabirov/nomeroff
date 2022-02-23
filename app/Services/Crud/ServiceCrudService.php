@@ -8,9 +8,17 @@ use App\Models\ServiceId;
 
 class ServiceCrudService extends BaseCrud
 {
-    
+
     public $modelClass = Service::class;
 
+    public function list(array $data = [], array $with = [])
+    {
+        $models = $this->query()
+                    ->filter($data)
+                    ->with(['serviceCarTypes'])
+                    ->paginate();
+        return $models;
+    }
 
     public function all()
     {
@@ -28,5 +36,5 @@ class ServiceCrudService extends BaseCrud
     {
         ServiceId::where('service_id', $servic_id)->delete();
     }
-    
+
 }

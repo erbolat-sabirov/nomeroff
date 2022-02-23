@@ -40,7 +40,9 @@ class UpdatePriceRequest extends BaseRequest
     public function getData(): PriceDto
     {
         $data = $this->all();
-        $data['service_id'] = $this->route('service_price')->id;
+        if(!array_key_exists('service_id', $data)) {
+            $data['service_id'] = $this->route('service_price')->id;
+        }
         return new PriceDto($data);
     }
 }

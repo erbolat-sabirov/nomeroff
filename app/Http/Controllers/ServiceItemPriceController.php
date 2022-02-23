@@ -18,8 +18,8 @@ class ServiceItemPriceController extends Controller
 {
 
     public function __construct(
-        private PriceCrudService $priceCrudService, 
-        private ServiceItemCrudService $serviceItemCrudService, 
+        private PriceCrudService $priceCrudService,
+        private ServiceItemCrudService $serviceItemCrudService,
         private ServiceCarTypeCrudService $serviceCarTypeCrudService)
     {
         $this->authorizeResource(Price::class, 'price');
@@ -57,7 +57,7 @@ class ServiceItemPriceController extends Controller
         $serviceCarTypes = $this->serviceCarTypeCrudService->createMany($dto->getTypesData());
         $this->priceCrudService->createMany($serviceCarTypes);
 
-        return redirect()->route('service-item-prices.index')->with('success', 'Price create success');
+        return redirect()->route('service-items.index')->with('success', 'Цена успешно создана');
     }
 
     /**
@@ -93,7 +93,7 @@ class ServiceItemPriceController extends Controller
     {
         $this->priceCrudService->updateMany($request->getData(), $service_item_price);
 
-        return redirect()->route('service-item-prices.index')->with('success', 'Price update success');
+        return redirect()->route('service-items.index')->with('success', 'Цена успешно изменена');
     }
 
     /**
@@ -105,6 +105,6 @@ class ServiceItemPriceController extends Controller
     public function destroy(ServiceItem $service_item_price)
     {
         $this->serviceCarTypeCrudService->deleteMany($service_item_price);
-        return redirect()->route('service-item-prices.index')->with('success', 'Price delete success');
+        return redirect()->route('service-items.index')->with('success', 'Цена успешно удалена');
     }
 }
