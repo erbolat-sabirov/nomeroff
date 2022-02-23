@@ -32,6 +32,8 @@ use App\Filters\WashingFilter;
  * @property-read int|null $items_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ServiceItem[] $serviceItems
  * @property-read int|null $service_items_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
+ * @property-read int|null $users_count
  */
 class Washing extends BaseModel
 {
@@ -92,5 +94,17 @@ class Washing extends BaseModel
     public function items()
     {
         return $this->hasMany(WashingServiceItem::class);
+    }
+
+    public function users()
+    {
+        return $this->hasManyThrough(
+            User::class, 
+            WashingUser::class,
+            'washing_id',
+            'id',
+            'id',
+            'user_id'
+        );
     }
 }

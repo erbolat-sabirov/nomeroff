@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|WashingServiceItem whereServiceItemId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WashingServiceItem whereWashingId($value)
  * @mixin \Eloquent
+ * @method static \Database\Factories\WashingServiceItemFactory factory(...$parameters)
  */
 class WashingServiceItem extends Model
 {

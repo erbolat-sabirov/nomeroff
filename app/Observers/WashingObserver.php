@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Washing;
+use App\Models\WashingUser;
 use App\Services\Crud\WashingCrudService;
 
 class WashingObserver
@@ -41,6 +42,7 @@ class WashingObserver
     public function updating(Washing $washing)
     {
         $this->washingCrudService->deleteServiceItems($washing);
+        WashingUser::where('washing_id', $washing->id)->delete();
     }
 
     /**
@@ -52,6 +54,7 @@ class WashingObserver
     public function deleted(Washing $washing)
     {
         $this->washingCrudService->deleteServiceItems($washing);
+        WashingUser::where('washing_id', $washing->id)->delete();
     }
 
     /**

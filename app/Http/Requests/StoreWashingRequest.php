@@ -8,6 +8,7 @@ use App\Interfaces\DtoInterface;
 use App\Models\Car;
 use App\Models\Service;
 use App\Models\ServiceItem;
+use App\Models\User;
 use App\Models\Washing;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -44,6 +45,15 @@ class StoreWashingRequest extends BaseRequest
                 'nullable',
                 'integer',
                 'exists:' . ServiceItem::class . ',id'
+            ],
+            'users' => [
+                'required',
+                'array'
+            ],
+            'users.*.id' => [
+                'required',
+                'integer',
+                'exists:' . User::class . ',id'
             ]
         ];
     }

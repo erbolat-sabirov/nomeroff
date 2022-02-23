@@ -17,7 +17,7 @@ class PriceEditViewModel extends BaseViewModel
         $types = [];
 
         foreach ($serviceCarTypes as $key => $value) {
-            $types[$value->carType->id]['amount'] = $value->price->id;
+            $types[$value->carType->id]['amount'] = $value->price?->amount;
         }
 
         $service_items = [];

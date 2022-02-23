@@ -11,6 +11,7 @@ class WashingDto extends BaseDto
     public $service_id;
     public $status;
     public $service_items;
+    public $users;
 
     public function dbData(): array
     {
@@ -26,5 +27,10 @@ class WashingDto extends BaseDto
     public function getServiceItems()
     {
         return $this->service_items;
+    }
+
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

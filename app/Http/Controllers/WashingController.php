@@ -48,6 +48,7 @@ class WashingController extends Controller
     {
         $model = $this->washingCrudService->create($request->getData());
         $this->washingCrudService->createServiceItems($model, $request->getData());
+        $this->washingCrudService->createWashedUsers($request->getData(), $model);
         return redirect()->route('washings.index')->with('success', 'Created');
     }
 

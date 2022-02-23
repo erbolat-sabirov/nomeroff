@@ -77,6 +77,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|CarBrand whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CarBrand whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CarBrand whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CarModel[] $carModels
+ * @property-read int|null $car_models_count
  */
 	class CarBrand extends \Eloquent {}
 }
@@ -101,6 +103,9 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|CarModel whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CarModel whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CarModel whereUpdatedAt($value)
+ * @property int $car_brand_id
+ * @property-read \App\Models\CarBrand $carBrand
+ * @method static \Illuminate\Database\Eloquent\Builder|CarModel whereCarBrandId($value)
  */
 	class CarModel extends \Eloquent {}
 }
@@ -126,6 +131,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|CarType whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CarType whereUpdatedAt($value)
  * @property-read \App\Models\Price|null $price
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ServiceCarType[] $serviceCarType
+ * @property-read int|null $service_car_type_count
  */
 	class CarType extends \Eloquent {}
 }
@@ -153,6 +160,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Price wherePriceableId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Price wherePriceableType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Price whereUpdatedAt($value)
+ * @property int $service_car_type_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Price whereServiceCarTypeId($value)
  */
 	class Price extends \Eloquent {}
 }
@@ -182,8 +191,39 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Service whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Service whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ServiceCarType[] $serviceCarTypes
+ * @property-read int|null $service_car_types_count
  */
 	class Service extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\ServiceCarType
+ *
+ * @property int $id
+ * @property int $car_type_id
+ * @property int $serviceable_id
+ * @property string $serviceable_type
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\CarType $carType
+ * @property-read \App\Models\Price|null $price
+ * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $serviceable
+ * @method static \Database\Factories\ServiceCarTypeFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|BaseModel filter($filter)
+ * @method static \Illuminate\Database\Eloquent\Builder|ServiceCarType newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ServiceCarType newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ServiceCarType query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ServiceCarType whereCarTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ServiceCarType whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ServiceCarType whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ServiceCarType whereServiceableId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ServiceCarType whereServiceableType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ServiceCarType whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	class ServiceCarType extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -222,22 +262,12 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ServiceItem whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ServiceItem whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ServiceItem whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ServiceCarType[] $serviceCarTypes
+ * @property-read int|null $service_car_types_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Service[] $services
  * @property-read int|null $services_count
  */
 	class ServiceItem extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * App\Models\ServiceCarType
- *
- * @method static \Database\Factories\ServiceCarTypeFactory factory(...$parameters)
- * @method static \Illuminate\Database\Eloquent\Builder|ServiceCarType newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|ServiceCarType newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|ServiceCarType query()
- */
-	class ServiceCarType extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -304,7 +334,40 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Washing whereServiceId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Washing whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Washing whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\WashingServiceItem[] $items
+ * @property-read int|null $items_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ServiceItem[] $serviceItems
+ * @property-read int|null $service_items_count
  */
 	class Washing extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\WashingServiceItem
+ *
+ * @property int $washing_id
+ * @property int $service_item_id
+ * @method static \Illuminate\Database\Eloquent\Builder|WashingServiceItem newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|WashingServiceItem newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|WashingServiceItem query()
+ * @method static \Illuminate\Database\Eloquent\Builder|WashingServiceItem whereServiceItemId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WashingServiceItem whereWashingId($value)
+ * @mixin \Eloquent
+ * @method static \Database\Factories\WashingServiceItemFactory factory(...$parameters)
+ */
+	class WashingServiceItem extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\WashingUsers
+ *
+ * @method static \Database\Factories\WashingUsersFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|WashingUsers newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|WashingUsers newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|WashingUsers query()
+ */
+	class WashingUsers extends \Eloquent {}
 }
 
