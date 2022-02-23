@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
-use App\Models\CarBrand;
+use App\Models\ServiceItem;
+use App\Models\Washing;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CarModelFactory extends Factory
+class WashingServiceItemFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -15,8 +16,8 @@ class CarModelFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->text(15),
-            'car_brand_id' => CarBrand::factory()
+            'washing_id' => Washing::inRandomOrder()->first()->id,
+            'service_item_id' => ServiceItem::factory(),
         ];
     }
 }

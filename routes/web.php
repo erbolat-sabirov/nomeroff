@@ -9,6 +9,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServiceItemController;
 use App\Http\Controllers\ServiceItemPriceController;
 use App\Http\Controllers\ServicePriceController;
+use App\Http\Controllers\WashingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,6 +44,7 @@ Route::group([
     Route::resource('cars', CarController::class);
     Route::resource('service-prices', ServicePriceController::class);
     Route::resource('service-item-prices', ServiceItemPriceController::class);
+    Route::resource('washings', WashingController::class);
 });
 
 require __DIR__.'/auth.php';

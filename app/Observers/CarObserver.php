@@ -2,11 +2,16 @@
 
 namespace App\Observers;
 
-use App\Dto\CarServiceDto;
+use App\Dto\WashingDto;
 use App\Models\Car;
+use App\Services\Crud\WashingCrudService;
 
 class CarObserver
 {
+
+    public function __construct(private WashingCrudService $washingCrudService)
+    {
+    }
 
     /**
      * Handle the Car "created" event.
@@ -16,6 +21,7 @@ class CarObserver
      */
     public function created(Car $car)
     {
+        $this->washingCrudService->create(new WashingDto(['car_id' => $car->id]));
     }
 
     /**

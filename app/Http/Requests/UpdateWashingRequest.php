@@ -2,19 +2,16 @@
 
 namespace App\Http\Requests;
 
+use App\Base\BaseRequest;
+use App\Dto\WashingDto;
+use App\Interfaces\DtoInterface;
+use App\Models\Car;
+use App\Models\Service;
+use App\Models\Washing;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateWashingRequest extends FormRequest
+class UpdateWashingRequest extends BaseRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return false;
-    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -24,7 +21,31 @@ class UpdateWashingRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'car_id' => [
+                'required',
+                'integer',
+                'exists:' . Car::class . ',id'
+            ],
+            'service_id' => [
+                'nullable',
+                'integer',
+                'exists:' . Service::class . ',id'
+            ],
+            'statis' => [
+                'required',
+                'string',
+                'in:' . implode(',', Washing::getStatusKeysList())
+            ],
+            'service_items.*.service_item_id' => [
+                'nullable',
+                'integer',
+                'exists:' . ServiceItem::class . ',id'
+            ]
         ];
+    }
+
+    public function getData(): DtoInterface
+    {
+        return new WashingDto($this->all());
     }
 }

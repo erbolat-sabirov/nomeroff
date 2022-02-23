@@ -10,10 +10,11 @@ use InvalidArgumentException;
 
 abstract class BaseCrud
 {
-    public function list(array $data = [])
+    public function list(array $data = [], array $with = [])
     {
         return $this->query()
             ->filter($data)
+            ->with($with)
             ->paginate();
     }
 

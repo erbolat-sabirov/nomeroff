@@ -28,6 +28,12 @@ use App\Filters\WashingFilter;
  * @method static \Illuminate\Database\Eloquent\Builder|Washing whereServiceId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Washing whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Washing whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\WashingServiceItem[] $items
+ * @property-read int|null $items_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ServiceItem[] $serviceItems
+ * @property-read int|null $service_items_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
+ * @property-read int|null $users_count
  */
 class Washing extends BaseModel
 {
@@ -71,5 +77,34 @@ class Washing extends BaseModel
     public function service()
     {
         return $this->belongsTo(Service::class);
+    }
+
+    public function serviceItems()
+    {
+        return $this->hasManyThrough(
+            ServiceItem::class, 
+            WashingServiceItem::class,
+            'washing_id',
+            'id',
+            'id',
+            'service_item_id'
+        );
+    }
+
+    public function items()
+    {
+        return $this->hasMany(WashingServiceItem::class);
+    }
+
+    public function users()
+    {
+        return $this->hasManyThrough(
+            User::class, 
+            WashingUser::class,
+            'washing_id',
+            'id',
+            'id',
+            'user_id'
+        );
     }
 }

@@ -24,7 +24,7 @@ class ServiceController extends Controller
      */
     public function index(Request $request)
     {
-        $models = $this->service->list();
+        $models = $this->service->list($request->all(), ['serviceCarTypes']);
         return view('service.index', ['models' => $models]);
     }
 

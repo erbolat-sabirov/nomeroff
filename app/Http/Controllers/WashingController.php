@@ -5,17 +5,27 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreWashingRequest;
 use App\Http\Requests\UpdateWashingRequest;
 use App\Models\Washing;
+use App\Services\Crud\WashingCrudService;
+use App\ViewModels\Washing\WashingCreateViewModel;
+use App\ViewModels\Washing\WashingEditViewModel;
+use App\ViewModels\Washing\WashingListViewModel;
+use Illuminate\Http\Request;
 
 class WashingController extends Controller
 {
+
+    public function __construct(private WashingCrudService $washingCrudService)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return view('washing.index', new WashingListViewModel(service:$this->washingCrudService, data:$request->all()));
     }
 
     /**
@@ -23,9 +33,9 @@ class WashingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        return view('washing.create', new WashingCreateViewModel(service:$this->washingCrudService, data:$request->old()));
     }
 
     /**
@@ -36,7 +46,10 @@ class WashingController extends Controller
      */
     public function store(StoreWashingRequest $request)
     {
-        //
+        $model = $this->washingCrudService->create($request->getData());
+        $this->washingCrudService->createServiceItems($model, $request->getData());
+        $this->washingCrudService->createWashedUsers($request->getData(), $model);
+        return redirect()->route('washings.index')->with('success', 'Created');
     }
 
     /**
@@ -56,9 +69,9 @@ class WashingController extends Controller
      * @param  \App\Models\Washing  $washing
      * @return \Illuminate\Http\Response
      */
-    public function edit(Washing $washing)
+    public function edit(Request $request, Washing $washing)
     {
-        //
+        return view('washing.edit', new WashingEditViewModel(service:$this->washingCrudService, data:$request->old(), model:$washing));
     }
 
     /**
@@ -70,7 +83,9 @@ class WashingController extends Controller
      */
     public function update(UpdateWashingRequest $request, Washing $washing)
     {
-        //
+        $model = $this->washingCrudService->update($request->getData(), $washing);
+        $this->washingCrudService->createServiceItems($model, $request->getData());
+        return redirect()->route('washings.index')->with('success', 'Updated');
     }
 
     /**
@@ -81,6 +96,7 @@ class WashingController extends Controller
      */
     public function destroy(Washing $washing)
     {
-        //
+        $this->washingCrudService->delete($washing);
+        return redirect()->route('washings.index')->with('success', 'Deleted');
     }
 }

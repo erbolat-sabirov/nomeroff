@@ -3,7 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Dto\CarDto;
+use App\Dto\WashingDto;
 use App\Services\Crud\CarCrudService;
+use App\Services\Crud\WashingCrudService;
 use Illuminate\Console\Command;
 
 class SetCarNumber extends Command
@@ -27,7 +29,7 @@ class SetCarNumber extends Command
      *
      * @return void
      */
-    public function __construct(private CarCrudService $carCrudService)
+    public function __construct(private CarCrudService $carCrudService, private WashingCrudService $washingCrudService)
     {
         parent::__construct();
     }
@@ -44,10 +46,11 @@ class SetCarNumber extends Command
         foreach ($numbers as $key => $value) {
             $zone = $zones[0] ?? 'ru';
             if (!$this->carCrudService->exists(number:$value, zone:$zone)) {
-                $this->carCrudService->create(new CarDto(['number' => $value, 'zone' => $zone]));
+                $car = $this->carCrudService->create(new CarDto(['number' => $value, 'zone' => $zone]));
             }else{
                 $car = $this->carCrudService->findByNumber($value);
             }
+            $this->washingCrudService->create(new WashingDto(['car_id' => $car->id]));
         }
 
         return 0;

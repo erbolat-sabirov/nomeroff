@@ -11,7 +11,7 @@ class ServiceCrudService extends BaseCrud
 
     public $modelClass = Service::class;
 
-    public function list(array $data = [])
+    public function list(array $data = [], array $with = [])
     {
         $models = $this->query()
                     ->filter($data)

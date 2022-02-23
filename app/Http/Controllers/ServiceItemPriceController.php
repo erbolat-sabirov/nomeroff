@@ -8,7 +8,6 @@ use App\Models\Price;
 use App\Models\ServiceItem;
 use App\Services\Crud\PriceCrudService;
 use App\Services\Crud\ServiceCarTypeCrudService;
-use App\Services\Crud\ServiceCrudService;
 use App\Services\Crud\ServiceItemCrudService;
 use App\ViewModels\Price\PriceCreateViewModel;
 use App\ViewModels\Price\PriceEditViewModel;
