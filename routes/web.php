@@ -7,6 +7,7 @@ use App\Http\Controllers\CarTypeController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServiceItemController;
+use App\Http\Controllers\ServiceItemPriceController;
 use App\Http\Controllers\ServicePriceController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,7 +42,7 @@ Route::group([
     Route::resource('car-brands', CarBrandController::class)->except(['show']);
     Route::resource('cars', CarController::class);
     Route::resource('service-prices', ServicePriceController::class);
-    Route::resource('service-item-prices', ServicePriceController::class);
+    Route::resource('service-item-prices', ServiceItemPriceController::class);
 });
 
 require __DIR__.'/auth.php';

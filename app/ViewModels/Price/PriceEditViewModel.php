@@ -17,13 +17,15 @@ class PriceEditViewModel extends BaseViewModel
         $types = [];
 
         foreach ($serviceCarTypes as $key => $value) {
-            $types[$value->carType->id]['amount'] = $value->price->id;
+            $types[$value->carType->id]['amount'] = $value->price?->amount;
         }
 
         $service_items = [];
 
-        foreach ($this->model->items as $key => $item) {
-            $service_items[$item->service_item_id]['id'] = $item->service_item_id;
+        if (isset($this->model->items)) {
+            foreach ($this->model->items as $key => $item) {
+                $service_items[$item->id]['id'] = $item->id;
+            }
         }
 
         $data = [
@@ -32,7 +34,7 @@ class PriceEditViewModel extends BaseViewModel
             'types' => $this->data['types'] ?? $types,
             'service_items' => $this->data['service_items'] ?? $service_items
         ];
-        
+
         return new PriceDto($data);
     }
 
@@ -41,7 +43,7 @@ class PriceEditViewModel extends BaseViewModel
         return $this->model;
     }
 
-    
+
     public function types()
     {
         $typeService = app(CarTypeCrudService::class);
@@ -55,6 +57,6 @@ class PriceEditViewModel extends BaseViewModel
 
     public function serviceItems()
     {
-        return $this->model->items();
+        return $this->model->items ?? null;
     }
 }
