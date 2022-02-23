@@ -9,6 +9,6 @@ class CarTypeListViewModel extends BaseViewModel
 
     public function models()
     {
-        return $this->service->list($this->data, ['serviceable', 'price']);
+        return $this->service->list($this->data);
     }
 }
