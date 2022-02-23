@@ -14,4 +14,9 @@ class ServiceItemCrudService extends BaseCrud
     {
         return $this->query()->get();
     }
+
+    public function doesntHaveCarTypes()
+    {
+        return $this->query()->whereDoesntHave('serviceCarTypes')->get();
+    }
 }

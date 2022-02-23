@@ -55,4 +55,9 @@ class Service extends BaseModel
         return $this->morphMany(ServiceCarType::class, 'serviceable')->with(['price', 'carType']);
     }
 
+    public function hasServiceCarTypes()
+    {
+        return !$this->serviceCarTypes->isEmpty();
+    }
+
 }

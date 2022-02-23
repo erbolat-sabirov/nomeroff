@@ -69,9 +69,11 @@
                                             </a>
                                         </td>
                                         <td class="text-sm font-medium leading-5 text-center whitespace-no-wrap border-b border-gray-200">
-                                            <a href="{{ route('service-prices.edit', $service) }}" class="px-4 py-2 rounded-md bg-sky-500 text-sky-100 hover:bg-sky-600">
-                                                Цены
-                                            </a>
+                                            @if ($service->hasServiceCarTypes())
+                                                <a href="{{ route('service-prices.edit', $service) }}" class="px-4 py-2 rounded-md bg-sky-500 text-sky-100 hover:bg-sky-600">
+                                                    Цены
+                                                </a>
+                                            @endif
                                         </td>
                                         <td class="text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200 ">
                                             <form action="{{ route('services.destroy', $service) }}" method="post" onSubmit="if(!confirm('Вы действительно хотите удалить услугу?')){return false;}" class="text-center">

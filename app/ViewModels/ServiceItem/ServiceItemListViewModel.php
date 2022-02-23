@@ -9,6 +9,7 @@ class ServiceItemListViewModel extends BaseViewModel
 
     public function models()
     {
-        return $this->service->list($this->data);
+        $models = $this->service->list($this->data);
+        return $models;
     }
 }

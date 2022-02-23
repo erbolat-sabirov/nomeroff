@@ -20,7 +20,7 @@ class PriceCreateViewModel extends BaseViewModel
     public function services()
     {
         $services = app(ServiceCrudService::class);
-        return $services->all();
+        return $services->doesntHaveCarTypes();
     }
 
     public function types()
@@ -32,6 +32,11 @@ class PriceCreateViewModel extends BaseViewModel
     public function allServiceItems()
     {
         return app(ServiceItemCrudService::class)->all();
+    }
+
+    public function serviceItems()
+    {
+        return app(ServiceItemCrudService::class)->doesntHaveCarTypes();
     }
 
 }

@@ -37,4 +37,9 @@ class ServiceCrudService extends BaseCrud
         ServiceId::where('service_id', $servic_id)->delete();
     }
 
+    public function doesntHaveCarTypes()
+    {
+        return $this->query()->whereDoesntHave('serviceCarTypes')->get();
+    }
+
 }
