@@ -1,6 +1,7 @@
 <div class="mb-4">
     <label for="service_id" class="block mb-2 text-sm font-medium text-gray-900">Услуга</label>
-    <select id="service_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('service_id') border-red-800 @enderror" name="service_id" required>
+    <select @isset($edit) disabled @endisset id="service_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('service_id') border-red-800 @enderror" name="service_id" required>
+        <option value="">Выберите</option>
         @foreach($serviceItems as $service)
             <option value="{{ $service->id }}" @if($service->id == $model->service_id) selected @endif>{{ $service->title }}</option>
         @endforeach

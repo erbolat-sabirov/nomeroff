@@ -12,6 +12,7 @@ use App\Services\Crud\ServiceCrudService;
 use App\ViewModels\Price\PriceCreateViewModel;
 use App\ViewModels\Price\PriceEditViewModel;
 use App\ViewModels\Price\PriceListViewModel;
+use DB;
 use Illuminate\Http\Request;
 
 class ServicePriceController extends Controller
@@ -54,9 +55,11 @@ class ServicePriceController extends Controller
     public function store(StorePriceRequest $request)
     {
         $dto = $request->getData();
-        $serviceCarTypes = $this->serviceCarTypeCrudService->createMany($dto->getTypesData());
-        $this->priceCrudService->createMany($serviceCarTypes);
-        $this->serviceCrudService->createItemIds($dto->getServiceItemsData());
+        DB::transaction(function() use($dto){
+            $serviceCarTypes = $this->serviceCarTypeCrudService->createMany($dto->getTypesData());
+            $this->priceCrudService->createMany($serviceCarTypes);
+            $this->serviceCrudService->createItemIds($dto->getServiceItemsData());
+        });
 
         return redirect()->route('services.index')->with('success', 'Цена успешно создана');
     }
@@ -93,9 +96,11 @@ class ServicePriceController extends Controller
     public function update(UpdatePriceRequest $request, Service $service_price)
     {
         $dto = $request->getData();
-        $this->serviceCrudService->deleteItemIds($service_price->id);
-        $this->priceCrudService->updateMany($dto, $service_price);
-        $this->serviceCrudService->createItemIds($dto->getServiceItemsData());
+        DB::transaction(function() use ($dto, $service_price){
+            $this->serviceCrudService->deleteItemIds($service_price->id);
+            $this->priceCrudService->updateMany($dto, $service_price);
+            $this->serviceCrudService->createItemIds($dto->getServiceItemsData());
+        });
 
         return redirect()->route('services.index')->with('success', 'Цена успешно обновлена');
     }
@@ -108,8 +113,10 @@ class ServicePriceController extends Controller
      */
     public function destroy(Service $service_price)
     {
-        $this->serviceCarTypeCrudService->deleteMany($service_price);
-        $this->serviceCrudService->deleteItemIds($service_price->id);
+        DB::transaction(function() use($service_price){
+            $this->serviceCarTypeCrudService->deleteMany($service_price);
+            $this->serviceCrudService->deleteItemIds($service_price->id);
+        });
         return redirect()->route('services.index')->with('success', 'Цена успешно удалена');
     }
 }

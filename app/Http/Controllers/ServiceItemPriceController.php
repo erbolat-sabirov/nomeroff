@@ -12,6 +12,7 @@ use App\Services\Crud\ServiceItemCrudService;
 use App\ViewModels\Price\PriceCreateViewModel;
 use App\ViewModels\Price\PriceEditViewModel;
 use App\ViewModels\Price\PriceListViewModel;
+use DB;
 use Illuminate\Http\Request;
 
 class ServiceItemPriceController extends Controller
@@ -54,8 +55,10 @@ class ServiceItemPriceController extends Controller
     public function store(StorePriceRequest $request)
     {
         $dto = $request->getData();
-        $serviceCarTypes = $this->serviceCarTypeCrudService->createMany($dto->getTypesData());
-        $this->priceCrudService->createMany($serviceCarTypes);
+        DB::transaction(function() use($dto){
+            $serviceCarTypes = $this->serviceCarTypeCrudService->createMany($dto->getTypesData());
+            $this->priceCrudService->createMany($serviceCarTypes);
+        });
 
         return redirect()->route('service-items.index')->with('success', 'Цена успешно создана');
     }

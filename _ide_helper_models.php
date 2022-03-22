@@ -338,6 +338,10 @@ namespace App\Models{
  * @property-read int|null $items_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ServiceItem[] $serviceItems
  * @property-read int|null $service_items_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
+ * @property-read int|null $users_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\WashingUser[] $usersThrough
+ * @property-read int|null $users_through_count
  */
 	class Washing extends \Eloquent {}
 }
@@ -361,13 +365,26 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * App\Models\WashingUsers
+ * App\Models\WashingTime
  *
- * @method static \Database\Factories\WashingUsersFactory factory(...$parameters)
- * @method static \Illuminate\Database\Eloquent\Builder|WashingUsers newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|WashingUsers newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|WashingUsers query()
+ * @method static \Database\Factories\WashingTimeFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|WashingTime newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|WashingTime newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|WashingTime query()
  */
-	class WashingUsers extends \Eloquent {}
+	class WashingTime extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\WashingUser
+ *
+ * @method static \Database\Factories\WashingUserFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|WashingUser newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|WashingUser newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|WashingUser query()
+ * @mixin \Eloquent
+ */
+	class WashingUser extends \Eloquent {}
 }
 

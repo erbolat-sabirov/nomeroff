@@ -4,7 +4,6 @@ namespace App\ViewModels\Price;
 
 use App\Base\BaseViewModel;
 use App\Dto\PriceDto;
-use App\Models\ServiceItem;
 use App\Services\Crud\CarTypeCrudService;
 use App\Services\Crud\ServiceItemCrudService;
 
@@ -35,7 +34,6 @@ class PriceEditViewModel extends BaseViewModel
             'types' => $this->data['types'] ?? $types,
             'service_items' => $this->data['service_items'] ?? $service_items
         ];
-
         return new PriceDto($data);
     }
 
@@ -58,6 +56,6 @@ class PriceEditViewModel extends BaseViewModel
 
     public function serviceItems()
     {
-        return $this->model->items ?? null;
+        return app(ServiceItemCrudService::class)->all();
     }
 }

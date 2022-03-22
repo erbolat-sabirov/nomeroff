@@ -112,4 +112,9 @@ class Washing extends BaseModel
     {
         return $this->hasMany(WashingUser::class);
     }
+
+    public function times()
+    {
+        return $this->hasMany(WashingTime::class);
+    }
 }
