@@ -11,6 +11,18 @@
 </div>
 
 <div class="mb-4">
+    <label for="car_type_id" class="block mb-2 text-sm font-medium text-gray-900">Тип</label>
+    <select id="car_type_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('car_type_id') border-red-800 @enderror" name="car_type_id" required>
+        @foreach($types as $key => $value)
+            <option value="{{ $key }}" @if($key == $model->car_type_id) selected @endif>{{ $value }}</option>
+        @endforeach
+    </select>
+    @error('car_type_id')
+    <p class="text-red-600">{{ $message }}</p>
+    @enderror
+</div>
+
+<div class="mb-4">
     <label class="block text-sm font-bold text-gray-700" for="title">
         Название
     </label>

@@ -25,7 +25,12 @@ class StoreCarModelRequest extends BaseRequest
                 'nullable',
                 'integer',
                 'exists:App\Models\CarBrand,id'
-            ]
+            ],
+            'car_type_id' => [
+                'nullable',
+                'integer',
+                'exists:App\Models\CarType,id'
+            ],
         ];
     }
 

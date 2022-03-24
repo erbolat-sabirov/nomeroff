@@ -13,9 +13,15 @@ class AddCarBrandIdToCarModelsTable extends Migration
      */
     public function up()
     {
-        Schema::table('car_models', function (Blueprint $table) {
-            $table->foreignId('car_brand_id')->references('id')->on('car_brands')->cascadeOnDelete();
-        });
+        if (Schema::hasColumn('car_models', 'car_brand_id')) {
+            Schema::table('car_models', function (Blueprint $table) {
+                $table->foreign('car_brand_id')->references('id')->on('car_brands')->cascadeOnDelete();
+            });
+        }else{
+            Schema::table('car_models', function (Blueprint $table) {
+                $table->unsignedBigInteger('car_brand_id');
+            });
+        }
     }
 
     /**
@@ -25,8 +31,10 @@ class AddCarBrandIdToCarModelsTable extends Migration
      */
     public function down()
     {
-        Schema::table('car_models', function (Blueprint $table) {
-            $table->dropColumn('car_brand_id');
-        });
+        if (Schema::hasColumn('car_models', 'car_brand_id')) {
+            Schema::table('car_models', function (Blueprint $table) {
+                $table->dropColumn('car_brand_id');
+            });
+        }
     }
 }

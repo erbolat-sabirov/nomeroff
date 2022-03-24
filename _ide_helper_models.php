@@ -340,6 +340,8 @@ namespace App\Models{
  * @property-read int|null $service_items_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
  * @property-read int|null $users_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\WashingTime[] $times
+ * @property-read int|null $times_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\WashingUser[] $usersThrough
  * @property-read int|null $users_through_count
  */
@@ -367,6 +369,7 @@ namespace App\Models{
 /**
  * App\Models\WashingTime
  *
+ * @property-read \App\Models\Washing|null $washing
  * @method static \Database\Factories\WashingTimeFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|WashingTime newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|WashingTime newQuery()

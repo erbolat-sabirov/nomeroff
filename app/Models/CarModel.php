@@ -45,4 +45,9 @@ class CarModel extends BaseModel
     {
         return $this->belongsTo(CarBrand::class);
     }
+
+    public function carType()
+    {
+        return $this->belongsTo(CarType::class);
+    }
 }
