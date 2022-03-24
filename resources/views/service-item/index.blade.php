@@ -16,8 +16,8 @@
         <div class="flex justify-start mb-4 mt-2">
             <a class="px-4 py-2 rounded-md bg-sky-500 text-sky-100 hover:bg-sky-600 mr-2"
                 href="{{ route('service-items.create') }}">Создать мини услугу</a>
-            <a class="px-4 py-2 rounded-md bg-sky-500 text-sky-100 hover:bg-sky-600"
-                href="{{ route('service-item-prices.create') }}">Создать цену на мини услугу</a>
+            {{-- <a class="px-4 py-2 rounded-md bg-sky-500 text-sky-100 hover:bg-sky-600"
+                href="{{ route('service-item-prices.create') }}">Создать цену на мини услугу</a> --}}
         </div>
         @forelse($models as $service)
             @if ($loop->first)
@@ -67,14 +67,14 @@
                         </a>
                     </td>
                     {{-- {{dd($service->serviceCarTypes)}} --}}
-                    <td class="text-sm font-medium leading-5 text-center whitespace-no-wrap border-b border-gray-200">
+                    {{-- <td class="text-sm font-medium leading-5 text-center whitespace-no-wrap border-b border-gray-200">
                         @if ($service->hasServiceCarTypes())
                             <a href="{{ route('service-item-prices.edit', $service) }}"
                                 class="px-4 py-2 rounded-md bg-sky-500 text-sky-100 hover:bg-sky-600">
                                 Цены
                             </a>
                         @endif
-                    </td>
+                    </td> --}}
                     <td class="text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200 ">
                         <form action="{{ route('service-items.destroy', $service) }}" method="post"
                             onSubmit="if(!confirm('Вы действительно хотите удалить мини услугу?')){return false;}"

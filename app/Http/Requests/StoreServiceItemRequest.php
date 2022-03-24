@@ -20,11 +20,32 @@ class StoreServiceItemRequest extends BaseRequest
             'title' => [
                 'required',
                 'string'
-            ]
+            ],
+            'price.types' => [
+                'required',
+                'array',
+            ],
+            'price.types.*.amount' => [
+                'required',
+                'numeric'
+            ],
+            'price.model' => [
+                'required',
+                'string'
+            ],
+            // 'price.service_items' => [
+            //     'nullable',
+            //     'array'
+            // ],
+            // 'price.service_items.*.id' => [
+            //     'nullable',
+            //     'integer',
+            //     'exists:' . ServiceItem::class . ',id'
+            // ]
         ];
     }
 
-    public function getData(): DtoInterface
+    public function getData(): ServiceItemDto
     {
         return new ServiceItemDto($this->all());
     }

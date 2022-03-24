@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreServiceItemRequest;
 use App\Http\Requests\UpdateServiceItemRequest;
 use App\Models\ServiceItem;
+use App\Services\Crud\PriceCrudService;
+use App\Services\Crud\ServiceCarTypeCrudService;
 use App\Services\Crud\ServiceItemCrudService;
 use App\ViewModels\ServiceItem\ServiceItemListViewModel;
 use App\ViewModels\ServiceItem\ServiceItemCreateViewModel;
 use App\ViewModels\ServiceItem\ServiceItemEditViewModel;
+use DB;
 use Illuminate\Http\Request;
 
 class ServiceItemController extends Controller
@@ -44,9 +47,17 @@ class ServiceItemController extends Controller
      * @param  \App\Http\Requests\StoreServiceRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreServiceItemRequest $request)
+    public function store(StoreServiceItemRequest $request, ServiceCarTypeCrudService $serviceCarTypeCrudService, PriceCrudService $priceCrudService)
     {
-        $model = $this->service->create($request->getData());
+        $dto = $request->getData();
+        DB::transaction(function() use($dto, $serviceCarTypeCrudService, $priceCrudService){
+            $model = $this->service->create($dto);
+            $priceDto = $dto->getPriceDto();
+            $priceDto->setService_id($model->id);
+            $serviceCarTypes = $serviceCarTypeCrudService->createMany($priceDto->getTypesData());
+            $priceCrudService->createMany($serviceCarTypes);
+        });
+
         return redirect()->route('service-items.index')->with('success', 'Успешно создано');
     }
 
@@ -68,9 +79,15 @@ class ServiceItemController extends Controller
      * @param  \App\Models\ServiceItem  $service_item
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateServiceItemRequest $request, ServiceItem $service_item)
+    public function update(UpdateServiceItemRequest $request, ServiceItem $service_item, PriceCrudService $priceCrudService)
     {
-        $model = $this->service->update($request->getData(), $service_item);
+        $dto = $request->getData();
+        DB::transaction(function() use($dto, $service_item, $priceCrudService){
+            $model = $this->service->update($dto, $service_item);
+            $priceDto = $dto->getPriceDto();
+            $priceDto->setService_id($model->id);
+            $priceCrudService->updateMany($priceDto, $service_item);
+        });
         return redirect()->route('service-items.index')->with('success', 'Успешно обновлено');
     }
 
@@ -80,9 +97,12 @@ class ServiceItemController extends Controller
      * @param  \App\Models\ServiceItem  $service_item
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ServiceItem $service_item)
+    public function destroy(ServiceItem $service_item, ServiceCarTypeCrudService $serviceCarTypeCrudService)
     {
-        $model = $this->service->delete($service_item);
+        DB::transaction(function() use($service_item, $serviceCarTypeCrudService){
+            $this->service->delete($service_item);
+            $serviceCarTypeCrudService->deleteMany($service_item);
+        });
         return redirect()->route('service-items.index')->with('success', 'Успешно удалено');
     }
 }

@@ -8,6 +8,7 @@ class ServiceItemDto extends BaseDto
 {
 
     public $title;
+    public $price;
     
     public function dbData(): array
     {
@@ -16,5 +17,10 @@ class ServiceItemDto extends BaseDto
         ];
 
         return del_arr_elem_if_null($data);
+    }
+
+    public function getPriceDto()
+    {
+        return new PriceDto($this->price);
     }
 }

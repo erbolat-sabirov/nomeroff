@@ -20,11 +20,23 @@ class UpdateServiceItemRequest extends FormRequest
             'title' => [
                 'required',
                 'string'
+            ],
+            'price.types' => [
+                'required',
+                'array',
+            ],
+            'price.types.*.amount' => [
+                'required',
+                'numeric'
+            ],
+            'price.model' => [
+                'required',
+                'string'
             ]
         ];
     }
 
-    public function getData(): DtoInterface
+    public function getData(): ServiceItemDto
     {
         return new ServiceItemDto($this->all());
     }

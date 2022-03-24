@@ -4,8 +4,9 @@ namespace App\ViewModels\ServiceItem;
 
 use App\Base\BaseViewModel;
 use App\Dto\ServiceItemDto;
+use App\ViewModels\Price\PriceEditViewModel;
 
-class ServiceItemEditViewModel extends BaseViewModel
+class ServiceItemEditViewModel extends PriceEditViewModel
 {
 
     public function model()
