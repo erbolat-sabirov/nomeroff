@@ -53,11 +53,11 @@
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                        {{ $carModel->carBrand->title }}
+                                        {{ $carModel->carBrand?->title }}
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                        {{ $carModel->carType->title }}
+                                        {{ $carModel->carType?->title }}
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
