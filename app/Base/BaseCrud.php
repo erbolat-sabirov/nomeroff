@@ -18,18 +18,18 @@ abstract class BaseCrud
             ->paginate();
     }
 
-    public function create(DtoInterface $data)
+    public function create(DtoInterface $dto)
     {
         $class = $this->getModelClass();
         $model = new $class();
-        $model = $model->create($data->dbData());
+        $model = $model->create($dto->dbData());
         return $model;
     }
 
-    public function update(DtoInterface $data, BaseModel|int $model): BaseModel|User
+    public function update(DtoInterface $dto, BaseModel|int $model): BaseModel|User
     {
         $model = $this->find($model);
-        $model->update($data->dbData());
+        $model->update($dto->dbData());
 
         return $model;
     }

@@ -6,7 +6,12 @@ use App\Dto\ServiceDto;
 use App\Http\Requests\StoreServiceRequest;
 use App\Http\Requests\UpdateServiceRequest;
 use App\Models\Service;
+use App\Services\Crud\PriceCrudService;
+use App\Services\Crud\ServiceCarTypeCrudService;
 use App\Services\Crud\ServiceCrudService;
+use App\ViewModels\Price\PriceCreateViewModel;
+use App\ViewModels\Price\PriceEditViewModel;
+use DB;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
@@ -33,10 +38,9 @@ class ServiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(Request $request, PriceCrudService $priceCrudService)
     {
-        $model = new ServiceDto($request->old());
-        return view('service.create', ['model' => $model]);
+        return view('service.create', new PriceCreateViewModel(service:$priceCrudService, data:$request->old()));
     }
 
     /**
@@ -45,9 +49,21 @@ class ServiceController extends Controller
      * @param  \App\Http\Requests\StoreServiceRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreServiceRequest $request)
+    public function store(
+        StoreServiceRequest $request, 
+        ServiceCarTypeCrudService $serviceCarTypeCrudService,
+        PriceCrudService $priceCrudService
+    )
     {
-        $model = $this->service->create($request->getData());
+        $dto = $request->getData();
+        DB::transaction(function() use($dto, $serviceCarTypeCrudService, $priceCrudService){
+            $model = $this->service->create($dto);
+            $priceDto = $dto->getPriceDto();
+            $priceDto->setService_id($model->id);
+            $serviceCarTypes = $serviceCarTypeCrudService->createMany($priceDto->getTypesData());
+            $priceCrudService->createMany($serviceCarTypes);
+            $this->service->createItemIds($priceDto->getServiceItemsData());
+        });
         return redirect()->route('services.index')->with('success', 'Успешно создано');
     }
 
@@ -57,10 +73,9 @@ class ServiceController extends Controller
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Service $service)
+    public function edit(Request $request, Service $service, PriceCrudService $priceCrudService)
     {
-        $model = new ServiceDto($request->old() ?: $service->toArray());
-        return view('service.edit', ['model' => $model, 'service' => $service]);
+        return view('service.edit', new PriceEditViewModel(service:$priceCrudService, data:$request->old() ?: $service->toArray(), model:$service));
     }
 
     /**
@@ -70,9 +85,17 @@ class ServiceController extends Controller
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateServiceRequest $request, Service $service)
+    public function update(UpdateServiceRequest $request, Service $service, PriceCrudService $priceCrudService)
     {
-        $model = $this->service->update($request->getData(), $service);
+        $dto = $request->getData();
+        DB::transaction(function() use ($dto, $service, $priceCrudService){
+            $model = $this->service->update($dto, $service);
+            $priceDto = $dto->getPriceDto();
+            $priceDto->setService_id($model->id);
+            $this->service->deleteItemIds($service->id);
+            $priceCrudService->updateMany($priceDto, $service);
+            $this->service->createItemIds($priceDto->getServiceItemsData());
+        });
         return redirect()->route('services.index')->with('success', 'Успешно обновлено');
     }
 
@@ -82,9 +105,13 @@ class ServiceController extends Controller
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Service $service)
+    public function destroy(Service $service, ServiceCarTypeCrudService $serviceCarTypeCrudService)
     {
-        $model = $this->service->delete($service);
+        DB::transaction(function() use($service, $serviceCarTypeCrudService){
+            $this->service->delete($service);
+            $serviceCarTypeCrudService->deleteMany($service);
+            $this->service->deleteItemIds($service->id);
+        });
         return redirect()->route('services.index')->with('success', 'Успешно удалено');
     }
 }

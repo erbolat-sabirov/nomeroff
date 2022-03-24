@@ -18,6 +18,7 @@ class WashingListViewModel extends BaseViewModel
 
     public function newModels()
     {
+        
         $data = $this->data;
         $data['status'] = Washing::STATUS_NEW;
         $models = $this->service->list($data, ['car', 'service', 'serviceItems']);

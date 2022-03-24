@@ -44,4 +44,24 @@ class PriceDto extends BaseDto
         }
         return $data;
     }
+
+    /**
+     * Get the value of service_id
+     */ 
+    public function getService_id()
+    {
+        return $this->service_id;
+    }
+
+    /**
+     * Set the value of service_id
+     *
+     * @return  self
+     */ 
+    public function setService_id($service_id)
+    {
+        $this->service_id = $service_id;
+
+        return $this;
+    }
 }

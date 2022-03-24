@@ -25,8 +25,8 @@
                                         <path d="M0 0h24v24H0z" fill="none" /></svg> </div>
                             </button>
                             <div x-show="show" class="mt-2 py-2 bg-white rounded-lg shadow-xl absolute">
-                                <a href="{{ route('services.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Услуги</a>
-                                <a href="{{ route('service-items.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Мини услуги</a>
+                                <a href="{{ route('services.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Комплексные услуги</a>
+                                <a href="{{ route('service-items.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Услуги</a>
                             </div>
                         </div>
                     </div>
