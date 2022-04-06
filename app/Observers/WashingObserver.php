@@ -4,11 +4,21 @@ namespace App\Observers;
 
 use App\Models\Washing;
 use App\Services\Crud\WashingCrudService;
+use App\Services\Crud\WashingTimeCrudService;
 
 class WashingObserver
 {
-    public function __construct(private WashingCrudService $washingCrudService)
+    public function __construct(private WashingCrudService $washingCrudService, private WashingTimeCrudService $washingCrudTimeService)
     {
+    }
+
+    public function saved(Washing $washing)
+    {
+        if ($washing->wasChanged('status')) {
+            $dto = $this->washingCrudTimeService->setData($washing);
+            $this->washingCrudTimeService->create($dto);
+        }
+
     }
 
     /**
@@ -19,6 +29,8 @@ class WashingObserver
      */
     public function created(Washing $washing)
     {
+        $dto = $this->washingCrudTimeService->setData($washing);
+        $this->washingCrudTimeService->create($dto);
     }
 
     /**

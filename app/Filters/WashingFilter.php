@@ -9,6 +9,6 @@ class WashingFilter extends BaseFilter
 
     public function status($value)
     {
-        return $this->builder->where('status', $value);
+        return $this->builder->whereIn('status', $value);
     }
 }

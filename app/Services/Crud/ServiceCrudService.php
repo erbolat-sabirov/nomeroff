@@ -11,22 +11,6 @@ class ServiceCrudService extends BaseCrud
 
     public $modelClass = Service::class;
 
-    public function list(array $data = [], array $with = [])
-    {
-        $models = $this->query()
-                    ->filter($data)
-                    ->with(['serviceCarTypes'])
-                    ->paginate();
-        return $models;
-    }
-
-    public function all()
-    {
-        $models = $this->query()->get();
-
-        return $models;
-    }
-
     public function createItemIds(array $data): bool
     {
         return ServiceId::insert($data);

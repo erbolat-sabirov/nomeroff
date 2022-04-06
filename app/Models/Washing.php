@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Base\BaseModel;
 use App\Filters\WashingFilter;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * App\Models\Washing
@@ -44,6 +45,10 @@ class Washing extends BaseModel
     const STATUS_CANCEL = 'cancel';
 
 
+    protected $attributes = [
+        'status' => self::STATUS_NEW
+    ];
+
     public function queryFilterClass(): string
     {
         return WashingFilter::class;
@@ -57,6 +62,21 @@ class Washing extends BaseModel
             self::STATUS_FINISH => __('message.finish'),
             self::STATUS_CANCEL => __('message.cancel'),
         ];
+    }
+
+    public function statusColors()
+    {
+        return [
+            self::STATUS_NEW => 'bg-blue-500',
+            self::STATUS_START => 'bg-teal-500',
+            self::STATUS_FINISH => 'bg-slate-500',
+            self::STATUS_CANCEL => 'bg-red-500'
+        ];
+    }
+
+    public function getStatusColor(): string
+    {
+        return $this->statusColors()[$this->status];
     }
 
     public static function getStatusKeysList(): array
@@ -91,6 +111,19 @@ class Washing extends BaseModel
         );
     }
 
+    public function price()
+    {
+        return $this->service()->with(['serviceCarType' => function($query){
+            $query->where('car_type_id', $this->car->car_type_id);
+        }])->first();
+    }
+
+    public function getPrice()
+    {
+        dd($this->price());
+        return $this->price()?->amount;
+    }
+
     public function items()
     {
         return $this->hasMany(WashingServiceItem::class);
@@ -116,5 +149,15 @@ class Washing extends BaseModel
     public function times()
     {
         return $this->hasMany(WashingTime::class);
+    }
+
+    public function getNewTime()
+    {
+        return $this->times()->where('status', self::STATUS_NEW)->first()->time;
+    }
+
+    public function getStatus()
+    {
+        return $this->getStatusList()[$this->status];
     }
 }

@@ -12,6 +12,14 @@ class WashingCrudService extends BaseCrud
     
     public $modelClass = Washing::class;
 
+    public function all(array $data = [], array $with = [])
+    {
+        return $this->query()
+            ->filter($data)
+            ->with($with)
+            ->get();
+    }
+
     public function createServiceItems(Washing $model, WashingDto $dto): Washing
     {
         if (!empty($dto->getServiceItems())) {
@@ -28,7 +36,6 @@ class WashingCrudService extends BaseCrud
 
     public function createWashingUsers(WashingDto $dto, Washing $model): Washing
     {
-
         if (!empty($dto->getUsers())) {
             $model->usersThrough()->createMany($dto->getUsers());
         }
@@ -37,7 +44,7 @@ class WashingCrudService extends BaseCrud
     }
 
     public function deleteWashingUsers(Washing $model){
-        return $model->items()->delete();
+        return $model->usersThrough()->delete();
     }
 
     public function deleteRelations(Washing $model)

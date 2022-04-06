@@ -11,4 +11,11 @@ class UserFilter extends BaseFilter
     {
         return $this->builder->role($value);
     }
+
+    public function user($value)
+    {
+        if ($value) {
+            return $this->builder->doesntHave('roles');
+        }
+    }
 }

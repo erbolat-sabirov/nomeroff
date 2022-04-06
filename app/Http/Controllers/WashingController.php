@@ -54,7 +54,7 @@ class WashingController extends Controller
                 $this->washingCrudService->createWashingUsers($request->getData(), $model);
             });
 
-            return redirect()->route('washings.index')->with('success', 'Created');
+            return redirect()->route('dashboard')->with('success', 'Created');
 
         } catch (\Exception $e) {
             throw $e;
@@ -94,11 +94,12 @@ class WashingController extends Controller
     public function update(UpdateWashingRequest $request, Washing $washing)
     {
         DB::transaction(function() use ($request, $washing){
+            $this->washingCrudService->deleteRelations($washing);
             $model = $this->washingCrudService->update($request->getData(), $washing);
             $this->washingCrudService->createServiceItems($model, $request->getData());
             $this->washingCrudService->createWashingUsers($request->getData(), $model);
         });
-        return redirect()->route('washings.index')->with('success', 'Updated');
+        return redirect()->route('dashboard')->with('success', 'Updated');
     }
 
     /**
@@ -110,6 +111,6 @@ class WashingController extends Controller
     public function destroy(Washing $washing)
     {
         $this->washingCrudService->delete($washing);
-        return redirect()->route('washings.index')->with('success', 'Deleted');
+        return redirect()->route('dashboard')->with('success', 'Deleted');
     }
 }

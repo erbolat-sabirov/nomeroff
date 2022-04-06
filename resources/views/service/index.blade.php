@@ -1,12 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="container max-w-7xl mx-auto mt-8">
-            <div class="mb-4">
-                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    Услуги
-                </h2>
-            </div>
-        </div>
+        Услуги
     </x-slot>
 
     <x-slot name="slot">

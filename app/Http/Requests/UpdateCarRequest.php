@@ -48,6 +48,10 @@ class UpdateCarRequest extends BaseRequest
                 'required',
                 'string'
             ],
+            'full_name' => [
+                'required',
+                'string'
+            ],
         ];
     }
 

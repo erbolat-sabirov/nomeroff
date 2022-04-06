@@ -12,7 +12,7 @@ class WashingListViewModel extends BaseViewModel
     {
         $data = $this->data;
         $data['status'] = Washing::STATUS_START;
-        $models = $this->service->list($data, ['car', 'service', 'serviceItems']);
+        $models = $this->service->list(data:$data, with:['car', 'service', 'serviceItems', 'users']);
         return $models;
     }
 
@@ -21,7 +21,7 @@ class WashingListViewModel extends BaseViewModel
         
         $data = $this->data;
         $data['status'] = Washing::STATUS_NEW;
-        $models = $this->service->list($data, ['car', 'service', 'serviceItems']);
+        $models = $this->service->list(data:$data, with:['car', 'service', 'serviceItems', 'users']);
 
         return $models;
     }

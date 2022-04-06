@@ -7,8 +7,8 @@ use App\Dto\WashingDto;
 use App\Interfaces\DtoInterface;
 use App\Models\Car;
 use App\Models\Service;
+use App\Models\ServiceItem;
 use App\Models\Washing;
-use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateWashingRequest extends BaseRequest
 {
@@ -21,25 +21,33 @@ class UpdateWashingRequest extends BaseRequest
     public function rules()
     {
         return [
-            'car_id' => [
-                'required',
-                'integer',
-                'exists:' . Car::class . ',id'
-            ],
             'service_id' => [
                 'nullable',
                 'integer',
-                'exists:' . Service::class . ',id'
+                'exists:services,id'
             ],
-            'statis' => [
+            'status' => [
                 'required',
                 'string',
                 'in:' . implode(',', Washing::getStatusKeysList())
             ],
+            'service_items' => [
+                'nullable',
+                'array'
+            ],
             'service_items.*.service_item_id' => [
                 'nullable',
                 'integer',
-                'exists:' . ServiceItem::class . ',id'
+                'exists:service_items,id'
+            ],
+            'washing_users' => [
+                'required',
+                'array'
+            ],
+            'washing_users.*.user_id' => [
+                'required',
+                'integer',
+                'exists:users,id'
             ]
         ];
     }

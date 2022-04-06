@@ -10,10 +10,7 @@ class ServiceItemCrudService extends BaseCrud
     
     public $modelClass = ServiceItem::class;
 
-    public function all()
-    {
-        return $this->query()->get();
-    }
+    
 
     public function doesntHaveCarTypes()
     {

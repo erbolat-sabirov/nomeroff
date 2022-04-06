@@ -18,6 +18,14 @@ abstract class BaseCrud
             ->paginate();
     }
 
+    public function all(array $data = [], array $with = [])
+    {
+        return $this->query()
+            ->filter($data)
+            ->with($with)
+            ->get();
+    }
+
     public function create(DtoInterface $dto)
     {
         $class = $this->getModelClass();
@@ -54,13 +62,18 @@ abstract class BaseCrud
      * @throws InvalidArgumentException
      * @throws ModelNotFoundException
      */
-    public function find(BaseModel|int $model)
+    public function find(BaseModel|int $model, array $with = [])
     {
         if ($model instanceof BaseModel) {
             return $model;
         }
         $class = $this->getModelClass();
-        return $class::findOrFail($model);
+        return $class::with($with)->where('id', $model)->first();
+    }
+
+    public function pluck($key, $value)
+    {
+        return $this->query()->pluck($value, $key);
     }
 
     /**

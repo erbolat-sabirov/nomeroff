@@ -14,6 +14,7 @@ class CarDto extends BaseDto
     public $zone;
     public $phone;
     public $description;
+    public $full_name;
 
     public function dbData(): array
     {
@@ -25,6 +26,7 @@ class CarDto extends BaseDto
             'zone' => $this->zone,
             'phone' => $this->phone,
             'description' => $this->description,
+            'full_name' => $this->full_name,
         ];
 
         return del_arr_elem_if_null($data);

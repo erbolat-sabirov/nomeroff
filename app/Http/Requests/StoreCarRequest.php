@@ -48,6 +48,10 @@ class StoreCarRequest extends BaseRequest
                 'nullable',
                 'string'
             ],
+            'full_name' => [
+                'nullable',
+                'string'
+            ],
         ];
     }
 

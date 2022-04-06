@@ -8,4 +8,5 @@ class UserFilterHolder extends BaseFilterHolder
 {
     
     public $manager;
+    public $user;
 }

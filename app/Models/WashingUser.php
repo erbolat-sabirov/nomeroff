@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Base\BaseModel;
+use App\Filters\WashingFilter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,7 +16,13 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|WashingUser query()
  * @mixin \Eloquent
  */
-class WashingUser extends Model
+class WashingUser extends BaseModel
 {
-    use HasFactory;
+
+    public $timestamps = false;
+
+    public function queryFilterClass(): string
+    {
+        return WashingFilter::class;
+    }
 }

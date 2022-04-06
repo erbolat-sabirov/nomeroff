@@ -74,6 +74,19 @@
 </div>
 
 <div class="mb-4">
+    <label class="block text-sm font-bold text-gray-700" for="full_name">
+        Имя
+    </label>
+
+    <input
+        class="block w-full mt-1 border-gray-300 @error('full_name') border-red-800 @enderror rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+        type="text" name="full_name" placeholder="Введите имя" value="{{ $model->full_name }}" required />
+    @error('full_name')
+    <p class="text-red-600">{{ $message }}</p>
+    @enderror
+</div>
+
+<div class="mb-4">
     <label class="block text-sm font-bold text-gray-700" for="description">
         Описание
     </label>
@@ -85,4 +98,5 @@
     <p class="text-red-600">{{ $message }}</p>
     @enderror
 </div>
+
 

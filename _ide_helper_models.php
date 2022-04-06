@@ -106,6 +106,9 @@ namespace App\Models{
  * @property int $car_brand_id
  * @property-read \App\Models\CarBrand $carBrand
  * @method static \Illuminate\Database\Eloquent\Builder|CarModel whereCarBrandId($value)
+ * @property int $car_type_id
+ * @property-read \App\Models\CarType|null $carType
+ * @method static \Illuminate\Database\Eloquent\Builder|CarModel whereCarTypeId($value)
  */
 	class CarModel extends \Eloquent {}
 }
@@ -193,6 +196,7 @@ namespace App\Models{
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ServiceCarType[] $serviceCarTypes
  * @property-read int|null $service_car_types_count
+ * @property-read \App\Models\ServiceCarType|null $serviceCarType
  */
 	class Service extends \Eloquent {}
 }
@@ -369,11 +373,19 @@ namespace App\Models{
 /**
  * App\Models\WashingTime
  *
- * @property-read \App\Models\Washing|null $washing
+ * @property int $id
+ * @property int $washing_id
+ * @property string $time
+ * @property string $status
+ * @property-read \App\Models\Washing $washing
  * @method static \Database\Factories\WashingTimeFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|WashingTime newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|WashingTime newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|WashingTime query()
+ * @method static \Illuminate\Database\Eloquent\Builder|WashingTime whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WashingTime whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WashingTime whereTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WashingTime whereWashingId($value)
  */
 	class WashingTime extends \Eloquent {}
 }
@@ -387,6 +399,11 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|WashingUser newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|WashingUser query()
  * @mixin \Eloquent
+ * @property int $washing_id
+ * @property int $user_id
+ * @method static \Illuminate\Database\Eloquent\Builder|BaseModel filter($filter)
+ * @method static \Illuminate\Database\Eloquent\Builder|WashingUser whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WashingUser whereWashingId($value)
  */
 	class WashingUser extends \Eloquent {}
 }
