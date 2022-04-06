@@ -10,8 +10,7 @@
                     <div class="bg-white shadow-xl">
                         <div class="py-6 px-4 sm:px-6">
                             <div class="flex items-start justify-between">
-                                <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">
-                                    Shopping cart</h2>
+                                <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">Клиенты</h2>
                             </div>
                             <div class="mt-8">
                                 <div class="flow-root">
