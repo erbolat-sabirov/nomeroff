@@ -33,6 +33,7 @@ Route::group([
 ], function(){
 
     Route::get('/dashboard', [IndexController::class, 'index'])->name('dashboard');
+    Route::get('/list', [IndexController::class, 'list'])->name('dashboard.list');
 
     Route::resource('managers', ManagerController::class)->except(['show']);
     Route::resource('services', ServiceController::class)->except(['show']);

@@ -5522,18 +5522,35 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
   \******************************/
 /***/ (() => {
 
-document.querySelectorAll('.washing-element').forEach(function (element) {
-  element.addEventListener('click', function (event) {
-    event.preventDefault();
-    var url = event.target.getAttribute('href');
-    console.log(event.target);
-    axios.get(url).then(function (res) {
-      document.getElementById('washing-form').innerHTML = res.data;
-    })["catch"](function (err) {
-      console.log(res);
+function updateWashingCars() {
+  var url = document.querySelector('#washing-list').getAttribute('data-url');
+  axios.get(url).then(function (res) {
+    document.getElementById('washing-list').innerHTML = res.data;
+    editCarParams();
+  })["catch"](function (err) {
+    console.log(err);
+  });
+}
+
+function editCarParams() {
+  document.querySelectorAll('.washing-element').forEach(function (element) {
+    element.addEventListener('click', function (event) {
+      event.preventDefault();
+      console.log(event);
+      var url = event.target.getAttribute('href');
+      axios.get(url).then(function (res) {
+        document.getElementById('washing-form').innerHTML = res.data;
+      })["catch"](function (err) {
+        console.log(res);
+      });
     });
   });
-});
+}
+
+setInterval(function () {
+  updateWashingCars();
+}, 5000);
+editCarParams();
 
 /***/ }),
 

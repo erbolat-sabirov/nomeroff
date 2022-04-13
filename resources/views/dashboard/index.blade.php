@@ -13,8 +13,8 @@
                                 <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">Клиенты</h2>
                             </div>
                             <div class="mt-8">
-                                <div class="flow-root">
-                                    @include('dashboard.washing-list')
+                                <div class="flow-root" id="washing-list" data-url="{{ route('dashboard.list') }}">
+                                    @include('dashboard.list')
                                 </div>
                             </div>
                         </div>

@@ -17,4 +17,9 @@ class IndexController extends Controller
     {
         return view('dashboard.index', new IndexViewModel(service:$this->washingCrudService, data:$request->all()));
     }
+
+    public function list(Request $request)
+    {
+        return view('dashboard.list', new IndexViewModel(service:$this->washingCrudService, data:$request->all()));
+    }
 }

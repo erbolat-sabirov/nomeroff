@@ -676,15 +676,6 @@ select {
 .col-span-2 {
   grid-column: span 2 / span 2;
 }
-.col-start-1 {
-  grid-column-start: 1;
-}
-.col-end-3 {
-  grid-column-end: 3;
-}
-.col-end-7 {
-  grid-column-end: 7;
-}
 .float-left {
   float: left;
 }
@@ -920,9 +911,6 @@ select {
 }
 .grid-cols-4 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-.grid-cols-6 {
-  grid-template-columns: repeat(6, minmax(0, 1fr));
 }
 .flex-row {
   flex-direction: row;
